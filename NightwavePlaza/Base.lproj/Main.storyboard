@@ -67,10 +67,9 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4y-IG-TWL">
-                                        <rect key="frame" x="193" y="13.5" width="131" height="33"/>
+                                        <rect key="frame" x="0.0" y="13.5" width="344" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="9Ne-9K-Lfa"/>
-                                            <constraint firstAttribute="width" priority="750" constant="131" id="L8g-AN-Ef4"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -82,9 +81,9 @@
                                     <constraint firstItem="qV7-XQ-cxe" firstAttribute="centerY" secondItem="2wr-gg-Exe" secondAttribute="centerY" id="Amf-2u-5rv"/>
                                     <constraint firstAttribute="height" constant="60" id="DXy-Qf-0Ru"/>
                                     <constraint firstItem="e4y-IG-TWL" firstAttribute="centerY" secondItem="2wr-gg-Exe" secondAttribute="centerY" id="Ska-GO-4Rb"/>
-                                    <constraint firstItem="e4y-IG-TWL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2wr-gg-Exe" secondAttribute="leading" id="gBB-dX-ZVk"/>
+                                    <constraint firstItem="e4y-IG-TWL" firstAttribute="leading" secondItem="2wr-gg-Exe" secondAttribute="leading" id="gBB-dX-ZVk"/>
                                     <constraint firstItem="qV7-XQ-cxe" firstAttribute="leading" secondItem="2wr-gg-Exe" secondAttribute="centerX" constant="20" id="rgN-Bp-AI3"/>
-                                    <constraint firstItem="e4y-IG-TWL" firstAttribute="trailing" secondItem="2wr-gg-Exe" secondAttribute="centerX" constant="-20" id="zTN-tL-krV"/>
+                                    <constraint firstItem="e4y-IG-TWL" firstAttribute="trailing" secondItem="2wr-gg-Exe" secondAttribute="centerX" id="zTN-tL-krV"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QxM-qD-qsd">
