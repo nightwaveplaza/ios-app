@@ -1,0 +1,6 @@
+framework module TyphoonRestClient {
+  umbrella header "TyphoonRestClient-umbrella.h"
+
+  export *
+  module * { export * }
+}

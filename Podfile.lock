@@ -1,0 +1,59 @@
+PODS:
+  - Differentiator (4.0.1)
+  - RxBiBinding (0.2.5):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - TRCAPIClient (0.0.1):
+    - TyphoonRestClient
+  - TyphoonRestClient (1.8.0)
+
+DEPENDENCIES:
+  - RxBiBinding
+  - RxCocoa
+  - RxDataSources
+  - RxSwift
+  - "TRCAPIClient (from `git@github.com:alexgarbarev/TRCAPIClient.git`)"
+  - TyphoonRestClient
+
+SPEC REPOS:
+  trunk:
+    - Differentiator
+    - RxBiBinding
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
+    - TyphoonRestClient
+
+EXTERNAL SOURCES:
+  TRCAPIClient:
+    :git: "git@github.com:alexgarbarev/TRCAPIClient.git"
+
+CHECKOUT OPTIONS:
+  TRCAPIClient:
+    :commit: 7227b084606950aa7d0c77cbf621c873b16bede6
+    :git: "git@github.com:alexgarbarev/TRCAPIClient.git"
+
+SPEC CHECKSUMS:
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  RxBiBinding: 6cc627d9e0dfa0b2ce8470cd7e539f3cb100f782
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  TRCAPIClient: e190f6c0966471b8ae31f8f77ed3c75cfc282a94
+  TyphoonRestClient: 262167748e32dbe25c6669e48c1559379841bd9c
+
+PODFILE CHECKSUM: 48d2fa088015786c567d603cff2a574ac893cc0b
+
+COCOAPODS: 1.9.2
