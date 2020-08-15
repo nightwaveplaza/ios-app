@@ -1,5 +1,9 @@
 PODS:
   - Differentiator (4.0.1)
+  - Kingfisher (5.14.1):
+    - Kingfisher/Core (= 5.14.1)
+  - Kingfisher/Core (5.14.1)
+  - PureLayout (3.1.6)
   - RxBiBinding (0.2.5):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
@@ -18,6 +22,8 @@ PODS:
   - TyphoonRestClient (1.8.0)
 
 DEPENDENCIES:
+  - Kingfisher
+  - PureLayout
   - RxBiBinding
   - RxCocoa
   - RxDataSources
@@ -28,6 +34,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Differentiator
+    - Kingfisher
+    - PureLayout
     - RxBiBinding
     - RxCocoa
     - RxDataSources
@@ -46,6 +54,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
+  PureLayout: bd3c4ec3a3819ad387c99ebb72c6b129c3ed4d2d
   RxBiBinding: 6cc627d9e0dfa0b2ce8470cd7e539f3cb100f782
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
@@ -54,6 +64,6 @@ SPEC CHECKSUMS:
   TRCAPIClient: e190f6c0966471b8ae31f8f77ed3c75cfc282a94
   TyphoonRestClient: 262167748e32dbe25c6669e48c1559379841bd9c
 
-PODFILE CHECKSUM: 48d2fa088015786c567d603cff2a574ac893cc0b
+PODFILE CHECKSUM: c637f103b8253a849c3b463c3c1745b8dee0b0e7
 
 COCOAPODS: 1.9.2

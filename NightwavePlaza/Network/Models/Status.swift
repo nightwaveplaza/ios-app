@@ -25,6 +25,9 @@ class Status: NSObject, Codable {
     
     var receivedAt = Date()
     var image: UIImage?
+    var imageFileUrl: URL?
+
+    var raw: Any?
     
     override func isEqual(_ object: Any?) -> Bool {
         if let anotherStatus = object as? Status  {

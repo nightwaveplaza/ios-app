@@ -16,10 +16,16 @@
 		FA0FFD612479B56100C58CFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0FFD602479B56100C58CFE /* Assets.xcassets */; };
 		FA0FFD642479B56100C58CFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0FFD622479B56100C58CFE /* LaunchScreen.storyboard */; };
 		FA0FFD6F2479B56100C58CFE /* NightwavePlazaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FFD6E2479B56100C58CFE /* NightwavePlazaTests.swift */; };
+		FA2D1DAC24E8873F00EE0556 /* WebBridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D1DAB24E8873F00EE0556 /* WebBridgeService.swift */; };
 		FA7069BB247A69D700AFBD61 /* gena.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7069BA247A69D700AFBD61 /* gena.plist */; };
 		FA7069BD247A6A0C00AFBD61 /* RequestToGetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069BC247A6A0C00AFBD61 /* RequestToGetStatus.swift */; };
 		FA7069C5247A6E8600AFBD61 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069C4247A6E8600AFBD61 /* RestClient.swift */; };
 		FA7069C8247A6FD900AFBD61 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069C7247A6FD900AFBD61 /* Status.swift */; };
+		FA9A397D24D6C3CD00E6EF38 /* WebMessageBusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */; };
+		FAC43AA224D6AB300073341F /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC43AA124D6AB300073341F /* Web.storyboard */; };
+		FAC43AA424D6AB520073341F /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC43AA324D6AB520073341F /* WebViewController.swift */; };
+		FAC43AA624D6AD940073341F /* web in Resources */ = {isa = PBXBuildFile; fileRef = FAC43AA524D6AD940073341F /* web */; };
+		FACEC4B824E852AB00265659 /* WebMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEC4B724E852AB00265659 /* WebMessage.swift */; };
 		FAE41EFB247A85E40076D927 /* StatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE41EFA247A85E40076D927 /* StatusService.swift */; };
 		FAE41EFD247A8B7C0076D927 /* RequestToGetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE41EFC247A8B7C0076D927 /* RequestToGetImage.swift */; };
 		FAE41EFF247AA47B0076D927 /* MetadataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE41EFE247AA47B0076D927 /* MetadataService.swift */; };
@@ -57,11 +63,17 @@
 		FA0FFD6A2479B56100C58CFE /* NightwavePlazaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NightwavePlazaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0FFD6E2479B56100C58CFE /* NightwavePlazaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightwavePlazaTests.swift; sourceTree = "<group>"; };
 		FA0FFD702479B56100C58CFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA2D1DAB24E8873F00EE0556 /* WebBridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBridgeService.swift; sourceTree = "<group>"; };
 		FA7069BA247A69D700AFBD61 /* gena.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = gena.plist; sourceTree = SOURCE_ROOT; };
 		FA7069BC247A6A0C00AFBD61 /* RequestToGetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToGetStatus.swift; sourceTree = "<group>"; };
 		FA7069BE247A6ABB00AFBD61 /* NightwavePlaza-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NightwavePlaza-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA7069C4247A6E8600AFBD61 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		FA7069C7247A6FD900AFBD61 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMessageBusService.swift; sourceTree = "<group>"; };
+		FAC43AA124D6AB300073341F /* Web.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Web.storyboard; sourceTree = "<group>"; };
+		FAC43AA324D6AB520073341F /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		FAC43AA524D6AD940073341F /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
+		FACEC4B724E852AB00265659 /* WebMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMessage.swift; sourceTree = "<group>"; };
 		FAE41EFA247A85E40076D927 /* StatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusService.swift; sourceTree = "<group>"; };
 		FAE41EFC247A8B7C0076D927 /* RequestToGetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToGetImage.swift; sourceTree = "<group>"; };
 		FAE41EFE247AA47B0076D927 /* MetadataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataService.swift; sourceTree = "<group>"; };
@@ -152,6 +164,7 @@
 		FA0FFD4B2479B55F00C58CFE = {
 			isa = PBXGroup;
 			children = (
+				FAC43AA524D6AD940073341F /* web */,
 				FA0FFD562479B55F00C58CFE /* NightwavePlaza */,
 				FA0FFD6D2479B56100C58CFE /* NightwavePlazaTests */,
 				FA0FFD552479B55F00C58CFE /* Products */,
@@ -179,6 +192,8 @@
 				FA0FFD5D2479B55F00C58CFE /* Main.storyboard */,
 				FA0FFD602479B56100C58CFE /* Assets.xcassets */,
 				FA0FFD622479B56100C58CFE /* LaunchScreen.storyboard */,
+				FAC43AA324D6AB520073341F /* WebViewController.swift */,
+				FAC43AA124D6AB300073341F /* Web.storyboard */,
 				FA0FFD652479B56100C58CFE /* Info.plist */,
 				FA7069BA247A69D700AFBD61 /* gena.plist */,
 				B2348EC994803B27A77EBFB5 /* Network */,
@@ -207,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				FA7069C7247A6FD900AFBD61 /* Status.swift */,
+				FACEC4B724E852AB00265659 /* WebMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,6 +233,8 @@
 				FAE41EF9247A85C60076D927 /* StatusService */,
 				FAE41EFE247AA47B0076D927 /* MetadataService.swift */,
 				FAE41F00247AA4A10076D927 /* PlaybackService.swift */,
+				FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */,
+				FA2D1DAB24E8873F00EE0556 /* WebBridgeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -336,6 +354,8 @@
 			files = (
 				FA0FFD642479B56100C58CFE /* LaunchScreen.storyboard in Resources */,
 				FA0FFD612479B56100C58CFE /* Assets.xcassets in Resources */,
+				FAC43AA224D6AB300073341F /* Web.storyboard in Resources */,
+				FAC43AA624D6AD940073341F /* web in Resources */,
 				FA7069BB247A69D700AFBD61 /* gena.plist in Resources */,
 				FA0FFD5F2479B55F00C58CFE /* Main.storyboard in Resources */,
 				933DA3AF9F6C2A968A6B5170 /* RequestToGetStatus.response.json in Resources */,
@@ -423,6 +443,7 @@
 				FAE41F03247ABD860076D927 /* UpdateScheduler.swift in Sources */,
 				FA7069C5247A6E8600AFBD61 /* RestClient.swift in Sources */,
 				FAE41F05247ACFA90076D927 /* BackgroundView.swift in Sources */,
+				FA9A397D24D6C3CD00E6EF38 /* WebMessageBusService.swift in Sources */,
 				FAE41F08247ADA570076D927 /* RequestToGetBackgrounds.swift in Sources */,
 				FAE41EFD247A8B7C0076D927 /* RequestToGetImage.swift in Sources */,
 				FAE41EFF247AA47B0076D927 /* MetadataService.swift in Sources */,
@@ -430,7 +451,10 @@
 				FA7069C8247A6FD900AFBD61 /* Status.swift in Sources */,
 				FA0FFD5C2479B55F00C58CFE /* MainViewController.swift in Sources */,
 				FA0FFD582479B55F00C58CFE /* AppDelegate.swift in Sources */,
+				FACEC4B824E852AB00265659 /* WebMessage.swift in Sources */,
 				FA7069BD247A6A0C00AFBD61 /* RequestToGetStatus.swift in Sources */,
+				FA2D1DAC24E8873F00EE0556 /* WebBridgeService.swift in Sources */,
+				FAC43AA424D6AB520073341F /* WebViewController.swift in Sources */,
 				FAE41EFB247A85E40076D927 /* StatusService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

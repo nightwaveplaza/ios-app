@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2020 by original authors @ fontello.com</metadata>
+<defs>
+<font id="plaza-icons" horiz-adv-x="1000" >
+<font-face font-family="plaza-icons" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="clock" unicode="&#xe800;" d="M0 350q0 95 37 182t100 149 150 100 182 37 182-37 149-100 100-149 37-182-37-182-100-150-149-100-182-37-182 37-150 100-100 150-37 182z m117 0q0-96 47-177t128-128 177-47q95 0 176 47t128 128 47 177q0 95-47 176t-128 128-176 47q-72 0-137-28t-112-75-75-112-28-136z m293 0v224q0 24 17 41t42 18 41-18 17-41v-200l142-141q17-17 17-42t-17-41-41-17q-25 0-42 17l-159 158q-1 2-4 5t-3 4q-1 2-2 4l-2 3t-1 4q-1 0-2 5-2 5-2 5-1 6-1 12z" horiz-adv-x="937.5" />
+
+<glyph glyph-name="star" unicode="&#xe801;" d="M2 460q11 37 101 37h225l69 207v1q19 56 44 75t49 0 43-75l1-1 68-207h226q58 0 85-17t14-47-59-63l-5-4-176-126 67-207 2-2q27-85-4-109t-105 29l-3 2-2 1-177 127-179-128-2-2q-73-52-105-29t-4 109l1 1v2l68 206-177 126-2 2-2 2q-73 52-61 90z" horiz-adv-x="931.2" />
+
+<glyph glyph-name="up" unicode="&#xe802;" d="M5 162q-14 22 7 54l363 582q14 20 34 20 10 0 19-5t12-10l5-5 362-582q21-32 8-54t-54-23h-147v-205q0-21-15-37t-37-16h-305q-21 0-37 16t-15 37v205h-147q-40 0-53 23z" horiz-adv-x="819.3" />
+
+<glyph glyph-name="heart" unicode="&#xe804;" d="M0 530q0 103 73 176t177 73q70 0 128-34t91-93q32 58 90 93t128 34q103 0 177-73t73-176q0-95-63-166l-343-403q-25-31-62-31t-63 31l-343 403q-63 71-63 166z" horiz-adv-x="937.5" />
+
+<glyph glyph-name="dislike" unicode="&#xf028;" d="M0 530q0 103 73 176t177 73q81 0 147-47l-14-250q0-12 9-20t21-9h10q12 0 18-8t3-20l-57-172q-4-12-2-13t9 8l194 267q7 9 4 16t-16 7h-77q-12 0-17 8t-1 18l82 183q57 32 124 32 103 0 177-73t73-176q0-94-63-166l-343-403q-25-31-62-31t-63 31l-342 403q-64 72-64 166z" horiz-adv-x="937.5" />
+</font>
+</defs>
+</svg>

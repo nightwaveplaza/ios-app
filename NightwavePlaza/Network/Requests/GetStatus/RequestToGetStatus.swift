@@ -24,7 +24,7 @@ class RequestToGetStatus: NSObject, TRCRequest  {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         let decoded = try decoder.decode(Status.self, from: JSONSerialization.data(withJSONObject: bodyObject!, options: .fragmentsAllowed))
-        
+        decoded.raw = bodyObject
         return decoded
     }
 

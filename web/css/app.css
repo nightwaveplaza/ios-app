@@ -1,0 +1,684 @@
+/* COMMON */
+* {
+    margin: 0;
+    padding: 0;
+    font-smooth: never;
+    -webkit-font-smoothing : none;
+    -moz-osx-font-smoothing: none;
+    cursor: default;
+}
+
+html, body {
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background: transparent;
+    min-height: 100%;
+    color: #070707;
+    font-family: Tahoma, Verdana, Segoe, '\30D2\30E9\30AE\30CE\89D2\30B4   ProN W3', 'Hiragino Kaku Gothic ProN', '\30E1\30A4\30EA\30AA', Meiryo, sans-serif;
+    font-size: 11px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* LAYOUT */
+.frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    padding: 1% 3%;
+}
+
+/* WINDOWS */
+
+.content p.lead {
+    font-size: 14px !important;
+    font-weight: 700;
+}
+
+
+.content-loading {
+    position: absolute;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #FFFFFF;
+    background-image: url("../img/win/loading.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 48px 48px;
+}
+
+/*
+    plaza98 override
+ */
+.win98 .window {
+    z-index: 100;
+}
+
+.win98 .window .header .icon {
+    background: url('../img/win/favicon-32x32.png') no-repeat;
+    background-size: cover;
+}
+
+/* MQ */
+@media (max-width: 500px) {
+    .win98 .window {
+        width: 100% !important;
+    }
+}.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+#window-about .win98 {
+  height: 100% !important;
+  max-height: 600px;
+}
+
+#window-about .win98 .window {
+  width: 450px;
+  height: 100% !important;
+}
+
+#window-about .win98 .inner {
+  height: 100% !important;
+}
+
+#window-about .win98 .content {
+  position: absolute !important;
+  top: 21px;
+  right: 1px;
+  left: 1px;
+  bottom: 2px;
+}
+
+#window-about .win98 button {
+  position: absolute;
+  bottom: 6px;
+  right: 0;
+}
+
+#window-about .about {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  bottom: 36px;
+  right: 0;
+  padding-right: 15px;
+  border: 1px solid gray;
+  border-right-color: #fff;
+  border-bottom-color: #dfdfdf;
+  background: #fff;
+}
+
+#window-about .memo {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+#window-about .content p {
+  font-size: 12px;
+  line-height: 150%;
+}
+
+#window-about img.plaza-win {
+  border-radius: 50%;
+  background: #fff;
+  width: 96px;
+  height: 96px;
+  padding: 0;
+  margin: 0 12px 0 0;
+}
+
+#window-loading .window {
+  width: 220px;
+  max-width: 220px;
+}
+
+#window-player .window {
+  width: 500px;
+  max-width: 95%;
+}
+
+#window-player .player-artist {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+#window-player .player-title {
+  font-size: 14px;
+}
+
+#window-player .player-time-container {
+  margin: 6px 0 3px 0;
+  border: 1px solid #808080;
+  border-right-color: #dfdfdf;
+  border-bottom-color: #dfdfdf;
+  position: relative;
+}
+
+#window-player .player-time {
+  position: relative;
+  z-index: 2;
+  line-height: 24px;
+  font-size: 14px;
+  text-align: center;
+}
+
+#window-player .player-button i, #window-player .player-button span {
+  cursor: pointer;
+}
+
+#window-player .cover {
+  background: #efe6eb;
+  padding: 0;
+  line-height: 0;
+  height: auto;
+  border: 1px solid;
+  border-top-color: #808080;
+  border-left-color: #808080;
+  border-bottom-color: #dfdfdf;
+  border-right-color: #dfdfdf;
+}
+
+#window-player .cover img {
+  width: 100%;
+  height: 100%;
+}
+
+#window-player-timer .window {
+  width: 250px;
+  max-width: 250px;
+}
+
+#window-player-timer input {
+  text-align: center;
+  width: 36px;
+  padding: 1px 0;
+}
+
+#window-player-minimized {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+}
+
+#window-player-minimized .window {
+  width: 100%;
+}
+
+#window-ratings .win98 {
+  height: 100% !important;
+  max-height: 600px;
+}
+
+#window-ratings .win98 .window {
+  width: 400px;
+  height: 100% !important;
+}
+
+#window-ratings .win98 .inner {
+  height: 100% !important;
+}
+
+#window-ratings .win98 .content {
+  position: absolute !important;
+  top: 21px;
+  right: 1px;
+  left: 1px;
+  bottom: 23px;
+}
+
+#window-ratings .ratings {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  bottom: 36px;
+  right: 0;
+  padding-right: 15px;
+  border: 1px solid gray;
+  border-right-color: #fff;
+  border-bottom-color: #dfdfdf;
+  background: #fff;
+}
+
+#window-ratings .ratings table {
+  width: 100%;
+  border: none;
+  margin: 0 16px 0 0;
+  padding: 0 3px;
+  border-collapse: collapse;
+}
+
+#window-ratings .ratings table tr {
+  border-bottom: 1px #c8c8c8 dashed;
+}
+
+#window-ratings .ratings table tr:last-child {
+  border-bottom: none;
+}
+
+#window-ratings .ratings table td {
+  vertical-align: middle;
+}
+
+#window-ratings .ratings table td.nowrap {
+  white-space: nowrap;
+}
+
+#window-ratings .ratings table .artist {
+  font-weight: 700;
+}
+
+#window-ratings .ratings table .icon-heart {
+  text-shadow: none;
+  opacity: 0.8;
+  color: #B22222;
+}
+
+#window-ratings .ratings table .icon-heart:before {
+  font-size: 11px;
+}
+
+#window-ratings .song-list-buttons {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+}
+
+#window-ratings .song-list-pagination {
+  font-size: 0;
+}
+
+#window-ratings .song-list-pagination button {
+  display: inline-block;
+  width: 24px;
+  margin-right: 3px;
+}
+
+#window-ratings .song-list-pagination button.active, #window-ratings .ratings-buttons button.active {
+  box-shadow: 1px 1px 0 0 black inset;
+  border-top-color: #808080;
+  border-left-color: #808080;
+  border-right-color: #dfdfdf;
+  border-bottom-color: #dfdfdf;
+}
+
+#window-ratings .statusbar {
+  position: absolute !important;
+  bottom: 0;
+  left: 1px;
+  right: 1px;
+}
+
+#window-reset .window {
+  width: 250px;
+}
+
+#window-settings .win98 .window, #window-settings-background .win98 .window {
+  width: 220px !important;
+}
+
+#window-settings .settings-title, #window-settings-background .settings-title {
+  font-weight: 700;
+  text-align: center;
+}
+
+#window-settings-lastfm .win98 .window {
+  width: 250px !important;
+  max-width: 250px;
+}
+
+#window-support .window {
+  width: 450px;
+}
+
+#window-support .content p.lead {
+  font-size: 14px !important;
+  line-height: 14px;
+}
+
+#window-support .donate-buttons .button {
+  line-height: 24px;
+}
+
+#window-support .donate-buttons .button img {
+  height: 24px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+#window-user .window {
+  width: 220px;
+  max-width: 220px;
+}
+
+#window-user-email .window {
+  width: 250px;
+  max-width: 250px;
+}
+
+#window-user-favorites .win98 {
+  height: 100% !important;
+  max-height: 600px;
+}
+
+#window-user-favorites .window {
+  width: 430px;
+  height: 100% !important;
+}
+
+#window-user-favorites .inner {
+  height: 100% !important;
+}
+
+#window-user-favorites .content {
+  position: absolute !important;
+  top: 21px;
+  right: 1px;
+  left: 1px;
+  bottom: 23px;
+}
+
+#window-user-favorites .favorites {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  bottom: 36px;
+  right: 0;
+  padding-right: 15px;
+  background: #fff;
+  border: 1px solid gray;
+  border-right-color: #fff;
+  border-bottom-color: #dfdfdf;
+}
+
+#window-user-favorites .favorites-empty {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  padding-top: 15px;
+  text-align: center;
+  background: white;
+}
+
+#window-user-favorites .favorites table {
+  width: 100%;
+  border: none;
+  margin: 0 16px 0 0;
+  padding: 0 3px;
+  border-collapse: collapse;
+}
+
+#window-user-favorites .favorites table tr {
+  border-bottom: 1px #c8c8c8 dashed;
+}
+
+#window-user-favorites .favorites table tr td {
+  vertical-align: middle;
+}
+
+#window-user-favorites .favorites tr.strike {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+#window-user-favorites .favorites td img {
+  width: 100%;
+  height: auto;
+  background: #efe6eb;
+  padding: 0;
+  line-height: 0;
+  border: 1px #808080 solid;
+  border-right-color: #dfdfdf;
+  border-bottom-color: #dfdfdf;
+}
+
+#window-user-favorites .favorites table tr:last-child {
+  border-bottom: none;
+}
+
+#window-user-favorites .artist {
+  margin-bottom: 1px;
+  font-weight: 700;
+}
+
+#window-user-favorites .title {
+  margin-bottom: 3px;
+}
+
+#window-user-favorites .date {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+#window-user-favorites .favorites-buttons {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+}
+
+#window-user-favorites .favorites-list-pagination {
+  font-size: 0;
+}
+
+#window-user-favorites .favorites-list-pagination button {
+  display: inline-block;
+  width: 24px;
+  margin-right: 3px;
+}
+
+#window-user-favorites .favorites-list-pagination button.active {
+  box-shadow: 1px 1px 0 0 black inset;
+  border-top-color: #808080;
+  border-left-color: #808080;
+  border-right-color: #dfdfdf;
+  border-bottom-color: #dfdfdf;
+}
+
+#window-user-favorites .statusbar {
+  position: absolute !important;
+  bottom: 0;
+  left: 1px;
+  right: 1px;
+}
+
+#window-user-login .window {
+  width: 480px;
+}
+
+#window-user-login .img-key {
+  margin-top: 2px;
+  width: 45px;
+  height: 48px;
+}
+
+#window-user-login a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+#window-user-login .login-buttons button {
+  width: 76px;
+  display: block;
+}
+
+#window-user-password .window {
+  width: 250px;
+  max-width: 250px;
+}
+
+#window-user-register .window {
+  width: 420px;
+}
+
+#window-user-register .img-register {
+  width: 120px;
+  height: auto;
+  max-width: 100%;
+}
+
+#window-user-register button {
+  margin-bottom: 2px;
+}
+
+#window-user-reset .window {
+  width: 250px;
+  max-width: 250px;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.win98 input {
+  font-size: 12px;
+}
+
+.win98 input:focus {
+  outline: none;
+  border: 1px #000000 dashed;
+}
+
+.win98 button:focus {
+  outline: none;
+}
+
+.statusbar table {
+  font-size: 12px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+}
+
+.app-desktop {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+}
+
+.content a {
+  color: #0645AD;
+  text-decoration: underline;
+}
+
+button.d-block, .button.d-block, input.d-block {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-start {
+  padding: 0 !important;
+  width: 100%;
+}
+
+.btn-start img {
+  height: 21px;
+  width: auto;
+}
+
+.statusbar {
+  margin: 1px;
+  background-image: url("../img/win/statusbar.png");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 12px 16px;
+  border: 1px solid #808080;
+  border-right-color: #fff;
+  border-bottom-color: #fff;
+}
+
+.statusbar table {
+  width: 100%;
+  font-size: 11px;
+  position: relative;
+  border-spacing: 0;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+  padding-right: 15px;
+}
+
+.statusbar table tr td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 18px;
+}
+
+.statusbar .with-divider {
+  display: inline-block;
+  position: relative;
+  padding-left: 10px;
+}
+
+.statusbar .with-divider:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #BFBFBF;
+  height: 20px;
+  width: 4px;
+  border-left: 1px #fff solid;
+  border-right: 1px #808080 solid;
+}
+
+.mb-fix {
+  margin-right: 1px;
+}
+
+@media (max-width: 500px) {
+  .player-artist, .player-title {
+    text-align: center;
+  }
+}

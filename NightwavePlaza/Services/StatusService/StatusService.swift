@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 class StatusService: NSObject {
     
@@ -72,15 +73,27 @@ class StatusService: NSObject {
     
     private func loadAlbumImage(status: Status) -> Observable<Status> {
         return Observable.create({ (observer) in
-            let handler = RestClient.shared.restClient.send(RequestToGetImage(url: status.playback.artwork)) { (image, error) in
-                if let image = image as? UIImage {
-                    status.image = image
+            
+            let absoluteUrlString = (RestClient.shared.baseUrl.absoluteString as NSString).appendingPathComponent(status.playback.artwork)
+            let imageUrl = URL(string: absoluteUrlString)!
+
+            KingfisherManager.shared.retrieveImage(with: imageUrl) { result in
+                switch result {
+                case .success(let value):
+
+                    status.image = value.image
+                    status.imageFileUrl = ImageCache.default.diskStorage.cacheFileURL(forKey: value.source.cacheKey)
+                    
+                    observer.onNext(status)
+                case .failure(let error):
+                    print(error) // The error happens
+                    observer.onError(error);
                 }
-                observer.onNext(status)
                 observer.onCompleted()
             }
+            
             return Disposables.create {
-                handler?.cancel()
+//                task?.cancel()
             }
         });
     }
