@@ -242,12 +242,16 @@ class WebBridgeService: NSObject, WebBusDelegate {
         preferences.drawing.arrowPosition = .bottom
         preferences.animating.showDuration = 0
         preferences.animating.dismissDuration = 0
-        preferences.drawing.arrowHeight = 33
+        preferences.drawing.arrowHeight = 25
         preferences.drawing.cornerRadius = 15
         preferences.positioning.bubbleHInset = 30
         preferences.drawing.borderColor = .black
-        preferences.drawing.arrowWidth = 36
+        preferences.drawing.arrowWidth = 27
         preferences.drawing.borderWidth = 1
+        preferences.drawing.shadowColor = .black
+        preferences.drawing.shadowRadius = 2
+        preferences.drawing.shadowOpacity = 1
+        preferences.drawing.shadowOffset = CGSize(width: 1, height: 1)
         
         self.currentTooltip = EasyTipView.show(forView: self.tooltipTarget,
                          withinSuperview: self.viewController!.view,
