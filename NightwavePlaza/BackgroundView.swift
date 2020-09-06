@@ -16,6 +16,8 @@ class BackgroundView: UIView {
     private var playerLayer = AVPlayerLayer()
     private var solidColor = UIColor(hex: "008B8B")
     
+    private var cache = BackgroundCacheManager.shared;
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -39,11 +41,33 @@ class BackgroundView: UIView {
                                                object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeForeground(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+        
+        cache.precacheAll()
     }
     
     var disposeBag = DisposeBag()
     
     func setUrl(url: URL) {
+        
+        cache.getLocalUrl(remoteUrl: url) { (result, error) in
+            if let localUrl = result {
+                self.setLocalUrl(url: localUrl)
+            } else {
+                self.setSolid()
+            }
+        }
+        
+        
+    }
+    
+    func setSolid() {
+        self.backgroundColor = self.solidColor
+        player.rate = 0
+        playerLayer.isHidden = true
+        playerLayer.player = nil
+    }
+    
+    func setLocalUrl(url: URL) {
         self.backgroundColor = UIColor.black
         playerLayer.isHidden = false
         
@@ -53,14 +77,6 @@ class BackgroundView: UIView {
         self.startPlayer(player: nextPlayer) {
             self.replacePlayer(player: nextPlayer)
         }
-        
-    }
-    
-    func setSolid() {
-        self.backgroundColor = self.solidColor
-        player.rate = 0
-        playerLayer.isHidden = true
-        playerLayer.player = nil
     }
     
     private func startPlayer(player: AVPlayer, completion: @escaping () -> ()) {

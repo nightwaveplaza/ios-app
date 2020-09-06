@@ -21,6 +21,8 @@
 		FA7069BD247A6A0C00AFBD61 /* RequestToGetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069BC247A6A0C00AFBD61 /* RequestToGetStatus.swift */; };
 		FA7069C5247A6E8600AFBD61 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069C4247A6E8600AFBD61 /* RestClient.swift */; };
 		FA7069C8247A6FD900AFBD61 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069C7247A6FD900AFBD61 /* Status.swift */; };
+		FA75265625052E8B00C649BC /* BackgroundCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75265525052E8B00C649BC /* BackgroundCacheManager.swift */; };
+		FA75265925052ECB00C649BC /* RequestToDownloadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75265825052ECB00C649BC /* RequestToDownloadFile.swift */; };
 		FA9A397D24D6C3CD00E6EF38 /* WebMessageBusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */; };
 		FAB2E1742504F7620026C008 /* StartMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E1732504F7620026C008 /* StartMenuHandler.swift */; };
 		FAB2E1762504F8840026C008 /* StartMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E1752504F8840026C008 /* StartMenuItem.swift */; };
@@ -75,6 +77,8 @@
 		FA7069BE247A6ABB00AFBD61 /* NightwavePlaza-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NightwavePlaza-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA7069C4247A6E8600AFBD61 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		FA7069C7247A6FD900AFBD61 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		FA75265525052E8B00C649BC /* BackgroundCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCacheManager.swift; sourceTree = "<group>"; };
+		FA75265825052ECB00C649BC /* RequestToDownloadFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToDownloadFile.swift; sourceTree = "<group>"; };
 		FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMessageBusService.swift; sourceTree = "<group>"; };
 		FAB2E1732504F7620026C008 /* StartMenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuHandler.swift; sourceTree = "<group>"; };
 		FAB2E1752504F8840026C008 /* StartMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuItem.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 		5D54ECC8A2676C6166ED0D43 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				FA75265725052EC000C649BC /* Download File */,
 				FAE41F06247ADA440076D927 /* GetBackgrounds */,
 				41BB05B60EB7A4E7A1B6E2B9 /* GetStatus */,
 				6B5E558DAB7568F6698AB50C /* GetImage */,
@@ -241,6 +246,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		FA75265725052EC000C649BC /* Download File */ = {
+			isa = PBXGroup;
+			children = (
+				FA75265825052ECB00C649BC /* RequestToDownloadFile.swift */,
+			);
+			path = "Download File";
+			sourceTree = "<group>";
+		};
 		FAB2E1722504F74F0026C008 /* Start Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +282,7 @@
 				FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */,
 				FA2D1DAB24E8873F00EE0556 /* WebBridgeService.swift */,
 				FAB2E180250514650026C008 /* AuthStorage.swift */,
+				FA75265525052E8B00C649BC /* BackgroundCacheManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -477,12 +491,14 @@
 				FAE41F03247ABD860076D927 /* UpdateScheduler.swift in Sources */,
 				FA7069C5247A6E8600AFBD61 /* RestClient.swift in Sources */,
 				FAE41F05247ACFA90076D927 /* BackgroundView.swift in Sources */,
+				FA75265625052E8B00C649BC /* BackgroundCacheManager.swift in Sources */,
 				FA9A397D24D6C3CD00E6EF38 /* WebMessageBusService.swift in Sources */,
 				FAB2E1742504F7620026C008 /* StartMenuHandler.swift in Sources */,
 				FAE41F08247ADA570076D927 /* RequestToGetBackgrounds.swift in Sources */,
 				FAE41EFD247A8B7C0076D927 /* RequestToGetImage.swift in Sources */,
 				FAB2E181250514650026C008 /* AuthStorage.swift in Sources */,
 				FAE41EFF247AA47B0076D927 /* MetadataService.swift in Sources */,
+				FA75265925052ECB00C649BC /* RequestToDownloadFile.swift in Sources */,
 				FAB2E1762504F8840026C008 /* StartMenuItem.swift in Sources */,
 				FAE41F01247AA4A10076D927 /* PlaybackService.swift in Sources */,
 				FAB2E17F25050B8C0026C008 /* StartMenuHeaderView.swift in Sources */,
