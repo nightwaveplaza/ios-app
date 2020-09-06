@@ -24,9 +24,8 @@ class SleepTimerService {
     
     func sleepAfter(minutes: Double) {
         let seconds = minutes * 60
-        print("Will sleep in seconds \(seconds)")
 
-        if seconds == 0 {
+        if minutes == 0 {
             self.timer?.invalidate()
             self.timer = nil
         } else {
@@ -38,9 +37,8 @@ class SleepTimerService {
         
     }
     
-    func secondsToSleep() -> Double {
+    func milisecondsSince1970ToSleep() -> Double {
         if let timer = self.timer {
-            print("Fire Interval, \(timer.fireDate.timeIntervalSinceNow)")
             return timer.fireDate.timeIntervalSince1970 * 1000
         } else {
             return 0

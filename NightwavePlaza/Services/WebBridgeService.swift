@@ -11,6 +11,7 @@ import WebKit
 import RxCocoa
 import RxSwift
 
+// Clean up!!!
 class WebBridgeService: NSObject, WebBusDelegate {
     
     weak var viewController: WebViewController?
@@ -25,11 +26,15 @@ class WebBridgeService: NSObject, WebBusDelegate {
     
     private var sleepTimer: SleepTimerService!
     
+    private let tooltipTarget = UIView()
+    private var currentTooltip: EasyTipView?
+    
     func setup(
         webView: WKWebView,
         statusService: StatusService,
         playback: PlaybackService,
-        metadata: MetadataService
+        metadata: MetadataService,
+        viewController: WebViewController
     ) {
         self.playback = playback;
         self.metadata = metadata;
@@ -39,6 +44,15 @@ class WebBridgeService: NSObject, WebBusDelegate {
             self.sendCurrentStatus()
         }
         webBus.webView = webView
+        
+        self.viewController = viewController
+        
+        
+        viewController.view.addSubview(self.tooltipTarget)
+        self.tooltipTarget.backgroundColor = UIColor.clear
+        self.tooltipTarget.autoSetDimensions(to: CGSize(width: 30, height: 30))
+        self.tooltipTarget.autoPinEdge(toSuperviewEdge: .bottom)
+        self.tooltipTarget.autoPinEdge(toSuperviewEdge: .right, withInset: 40)
         
         self.bindEvents()
     }
@@ -69,8 +83,6 @@ class WebBridgeService: NSObject, WebBusDelegate {
     
     
     func webBusDidReceiveMessage(message: WebMessage, completion: @escaping (Any?, String?) -> Void) {
-        
-        print("Received message: \(message.name)")
         
         if message.name == "requestUiUpdate" {
             self.sendCurrentStatus()
@@ -149,6 +161,19 @@ class WebBridgeService: NSObject, WebBusDelegate {
             }
             completion(nil, nil)
         }
+        else if message.name == "getVote" {
+            
+            completion(self.currentVote(), nil)
+        }
+        else if message.name == "updateVote" {
+            
+            completion(nil, nil)
+        }
+        else if message.name == "showToast" {
+            print("Toast: \(message.args[0])")
+            self.showTooltip(message.args[0])
+            completion(nil, nil)
+        }
  
         else {
             print("Unhandled message: \(message.name)")
@@ -173,12 +198,54 @@ class WebBridgeService: NSObject, WebBusDelegate {
             }
             playback["isPlaying"] = playing
             playback["updated"] = status.receivedAt.timeIntervalSince1970 * 1000
-            playback["sleepTime"] = self.sleepTimer.secondsToSleep()
+            
+            let time = self.sleepTimer.milisecondsSince1970ToSleep()
+            if time < 1 {
+                playback["sleepTime"] = Int(0)
+            } else {
+                playback["sleepTime"] = time
+            }
+            
             
             return playback
         } else {
             return NSDictionary()
         }
+    }
+    
+    private func currentVote() -> NSDictionary {
+        let dict = NSMutableDictionary()
+        dict["artist"] = "";
+        dict["title"] = "";
+        dict["artwork"] = "";
+        dict["rate"] = 0;
+        return dict;
+    }
+    
+    private func showTooltip(_ text: String) {
+        
+        if let current = self.currentTooltip {
+            current.dismiss()
+        }
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = UIFont.systemFont(ofSize: 15)
+        preferences.drawing.foregroundColor = .black
+        preferences.drawing.backgroundColor = UIColor(hex: "FBFBDE")!
+        preferences.drawing.arrowPosition = .bottom
+        preferences.animating.showDuration = 0
+        preferences.animating.dismissDuration = 0
+        preferences.drawing.arrowHeight = 33
+        preferences.drawing.cornerRadius = 15
+        preferences.positioning.bubbleHInset = 30
+        preferences.drawing.borderColor = .black
+        preferences.drawing.arrowWidth = 36
+        preferences.drawing.borderWidth = 1
+        
+        self.currentTooltip = EasyTipView.show(forView: self.tooltipTarget,
+                         withinSuperview: self.viewController!.view,
+        text: text,
+        preferences: preferences,
+        delegate: nil)
     }
     
     

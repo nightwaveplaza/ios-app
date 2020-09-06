@@ -472,7 +472,7 @@ var iOSBridge = {
     return sendMessage('getVote');
   },
   updateVote: function updateVote(rate) {
-    return sendMessage('updateVote', [rate]);
+    return sendMessage('updateVote', ["".concat(rate)]);
   },
   getAuthToken: function getAuthToken() {
     return sendMessage('getAuthToken');
@@ -949,6 +949,7 @@ var RTDATA_UPDATE_INTERVAL = 15000;
       return this.currentVote.rate === -1 ? '#3455DB' : '';
     },
     timerColor: function timerColor() {
+      console.log("SleepTime: '".concat(this.sleepTime, "'"));
       return this.sleepTime !== 0 ? '#3455DB' : '';
     },
     currentVote: function currentVote() {

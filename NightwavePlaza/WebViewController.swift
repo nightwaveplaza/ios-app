@@ -60,8 +60,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         self.view.addSubview(backgroundView)
         backgroundView.autoPinEdgesToSuperviewEdges()
         
-        self.webBridge.setup(webView: self.webView, statusService: self.statusService, playback: self.playback, metadata: self.metadata);
-        self.webBridge.viewController = self;
+        self.webBridge.setup(webView: self.webView, statusService: self.statusService, playback: self.playback, metadata: self.metadata, viewController: self);
         
         self.setupWebView()
     }
