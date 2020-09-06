@@ -10,17 +10,40 @@ import Foundation
 import AVFoundation
 import MediaPlayer
 
+enum PlaybackQuality: Int {
+    case High = 0
+    case Eco = 1
+}
+
 class PlaybackService {
     
+    var qualityStorage = CCUserDefaultsStorage(with: NSNumber.self, key: "quality")
     
-    let player = AVPlayer(url: URL(string: "https://radio.plaza.one/mp3")!)
+    var quality: PlaybackQuality {
+        set {
+            qualityStorage?.save(NSNumber(integerLiteral: newValue.rawValue))
+            self.replacePlayerForQuality()
+        }
+        get {
+            if let storedQuality = qualityStorage?.getObject() as? NSNumber, let quality = PlaybackQuality.init(rawValue: storedQuality.intValue) {
+                return quality;
+            } else {
+                return .High
+            }
+        }
+    }
+    
+    var player = AVPlayer(url: URL(string: "https://radio.plaza.one/mp3")!)
     
     init() {
         self.setupPlaybackSession()
         self.setupRemoteTransportControls()
+
+        self.replacePlayerForQuality()        
     }
     
     func toggle() {
+        
         if (player.rate == 1) {
             player.pause()
         } else {
@@ -32,6 +55,21 @@ class PlaybackService {
         get {
             return self.player.timeControlStatus == AVPlayer.TimeControlStatus.paused
         }
+    }
+    
+    func replacePlayerForQuality() {
+        
+        let url = self.quality == .High ? URL(string: "https://radio.plaza.one/mp3")! : URL(string: "https://radio.plaza.one/mp3_96")!
+        
+        let rate = self.player.rate;
+        
+        self.player.pause()
+        
+        self.player = AVPlayer(url: url)
+        
+        self.player.rate = rate
+        
+        
     }
     
     private func setupPlaybackSession() {

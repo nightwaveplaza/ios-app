@@ -502,7 +502,7 @@ var iOSBridge = {
     return sendMessage('getAudioQuality');
   },
   setAudioQuality: function setAudioQuality(lowQuality) {
-    return sendMessage('setAudioQuality', [lowQuality]);
+    return sendMessage('setAudioQuality', ["".concat(lowQuality)]);
   },
   toggleFullscreen: function toggleFullscreen() {
     return sendMessage('toggleFullscreen');

@@ -106,10 +106,33 @@ class WebBridgeService: NSObject, WebBusDelegate {
             }
             completion(nil, nil)
         } else if message.name == "getUserAgent" {
-            
             completion("'NightwavePlaza iOS App'", nil)
+        } else if message.name == "toggleFullscreen" {
+            self.viewController?.fullScreen = !(self.viewController?.fullScreen ?? true)
+            UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.viewController?.setNeedsStatusBarAppearanceUpdate()
+                   })
+            completion(nil, nil)
+        } else if message.name == "getAppVersion" {
+            let dictionary = Bundle.main.infoDictionary!
+            let versionValue = dictionary["CFBundleShortVersionString"] ?? "0"
+            let buildValue = dictionary["CFBundleVersion"] ?? "0"
+            
+            completion("'\(versionValue) (build \(buildValue))'", nil)
+        } else if message.name == "getIapStatus" {
+            completion("0", nil)
         }
-        
+        else if message.name == "getAudioQuality" {
+            completion("\(playback.quality.rawValue)", nil)
+        }
+        else if message.name == "setAudioQuality" {
+            if let qualityInt = Int(message.args[0]), let quality = PlaybackQuality(rawValue: qualityInt) {
+                playback.quality = quality
+            }
+            completion("\(playback.quality.rawValue)", nil)
+        }
+ 
         else {
             print("Unhandled message: \(message.name)")
         }

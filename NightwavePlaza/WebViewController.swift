@@ -27,6 +27,22 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     private var selectionWasDisabled = false
     
+    var fullScreenStorage = CCUserDefaultsStorage(with: NSNumber.self, key: "fullScreen")
+    
+    var fullScreen: Bool {
+        set {
+            
+            fullScreenStorage?.save(NSNumber(booleanLiteral: newValue))
+        }
+        get {
+            if let value = fullScreenStorage?.getObject() as? NSNumber {
+                return value.boolValue
+            } else {
+                return true
+            }
+        }
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.playback = PlaybackService();
         self.metadata = MetadataService(playback: playback)
@@ -67,6 +83,18 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         
         
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return self.fullScreen
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
     }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
