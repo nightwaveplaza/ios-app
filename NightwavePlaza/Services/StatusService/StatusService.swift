@@ -73,28 +73,44 @@ class StatusService: NSObject {
     
     private func loadAlbumImage(status: Status) -> Observable<Status> {
         return Observable.create({ (observer) in
-            
-            let absoluteUrlString = (RestClient.shared.baseUrl.absoluteString as NSString).appendingPathComponent(status.playback.artwork)
-            let imageUrl = URL(string: absoluteUrlString)!
-
-            KingfisherManager.shared.retrieveImage(with: imageUrl) { result in
-                switch result {
-                case .success(let value):
-
-                    status.image = value.image
-                    status.imageFileUrl = ImageCache.default.diskStorage.cacheFileURL(forKey: value.source.cacheKey)
-                    
-                    observer.onNext(status)
-                case .failure(let error):
-                    print(error) // The error happens
-                    observer.onError(error);
+            let handler = RestClient.shared.restClient.send(RequestToGetImage(url: status.playback.artwork)) { (image, error) in
+                if let image = image as? UIImage {
+                    status.image = image
+                    status.imageFileUrl = self.storeImage(image: image)
                 }
+                observer.onNext(status)
                 observer.onCompleted()
             }
-            
             return Disposables.create {
-//                task?.cancel()
+                handler?.cancel()
             }
         });
     }
+    
+    private func storeImage(image: UIImage) -> URL {
+        let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(),
+        isDirectory: false)
+
+        let coverImageDir = temporaryDirectoryURL.appendingPathComponent("cover")
+        let imageUrl = coverImageDir.appendingPathComponent("\(ProcessInfo().globallyUniqueString).png")
+        
+        do {
+            
+            if (FileManager.default.fileExists(atPath: coverImageDir.path)) {
+                try FileManager.default.removeItem(at: coverImageDir)
+            }
+            try FileManager.default.createDirectory(at: coverImageDir, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            print("Unable to create directory.\n\n\(error)")
+        }
+        
+        do {
+            try image.pngData()!.write(to: imageUrl)
+        } catch {
+            print("Unable to write image to url: \(imageUrl).\n\nError: \(error)")
+        }
+        
+        return imageUrl;
+    }
+    
 }
