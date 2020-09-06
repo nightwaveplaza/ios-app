@@ -48,11 +48,7 @@ class WebBridgeService: NSObject, WebBusDelegate {
         self.viewController = viewController
         
         
-        viewController.view.addSubview(self.tooltipTarget)
-        self.tooltipTarget.backgroundColor = UIColor.clear
-        self.tooltipTarget.autoSetDimensions(to: CGSize(width: 30, height: 30))
-        self.tooltipTarget.autoPinEdge(toSuperviewEdge: .bottom)
-        self.tooltipTarget.autoPinEdge(toSuperviewEdge: .right, withInset: 40)
+        
         
         self.bindEvents()
     }
@@ -226,6 +222,16 @@ class WebBridgeService: NSObject, WebBusDelegate {
     
     private func showTooltip(_ text: String) {
         
+        if self.tooltipTarget.superview == nil {
+            self.viewController!.view.addSubview(self.tooltipTarget)
+            self.tooltipTarget.backgroundColor = UIColor.clear
+            self.tooltipTarget.autoSetDimensions(to: CGSize(width: 30, height: 0))
+            self.tooltipTarget.autoPinEdge(toSuperviewEdge: .bottom, withInset: self.viewController!.bottomLayoutGuide.length)
+            self.tooltipTarget.autoPinEdge(toSuperviewEdge: .right, withInset: 40)
+            
+            self.viewController!.view.layoutSubviews()
+            
+        }
         if let current = self.currentTooltip {
             current.dismiss()
         }
