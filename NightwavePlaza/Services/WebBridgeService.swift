@@ -23,6 +23,8 @@ class WebBridgeService: NSObject, WebBusDelegate {
     
     private let webBus = WebMessageBus()
     
+    private var sleepTimer: SleepTimerService!
+    
     func setup(
         webView: WKWebView,
         statusService: StatusService,
@@ -32,7 +34,10 @@ class WebBridgeService: NSObject, WebBusDelegate {
         self.playback = playback;
         self.metadata = metadata;
         self.statusService = statusService
-        
+        self.sleepTimer = SleepTimerService(playback: self.playback)
+        self.sleepTimer.onSleep = { [unowned self] in
+            self.sendCurrentStatus()
+        }
         webBus.webView = webView
         
         self.bindEvents()
@@ -68,10 +73,16 @@ class WebBridgeService: NSObject, WebBusDelegate {
         print("Received message: \(message.name)")
         
         if message.name == "requestUiUpdate" {
-            if let status = try? statusService.status$.value() {
-                self.webBus.sendSongStatus(status: status, playing: self.playback.paused == false)
-            }
+            self.sendCurrentStatus()
             completion(nil, nil)
+        }
+        else if message.name == "getStatus" {
+          if let status = try? statusService.status$.value() {
+              let songObject = self.songObject(status: status, isPlaying: self.playback.paused == false)
+            completion(songObject, nil)
+          } else {
+            completion(nil, nil)
+          }
         } else if message.name == "audioPlay" {
             self.playback.player.play()
             completion(nil, nil)
@@ -132,11 +143,42 @@ class WebBridgeService: NSObject, WebBusDelegate {
             }
             completion("\(playback.quality.rawValue)", nil)
         }
+        else if message.name == "setSleepTimer" {
+            if let timeInMinutes = Double(message.args[0]) {
+                self.sleepTimer.sleepAfter(minutes: timeInMinutes)
+            }
+            completion(nil, nil)
+        }
  
         else {
             print("Unhandled message: \(message.name)")
         }
         
+    }
+    
+    private func sendCurrentStatus() {
+        if let status = try? statusService.status$.value() {
+            let songObject = self.songObject(status: status, isPlaying: self.playback.paused == false)
+            self.webBus.sendMessage(
+                name: "status",
+                data: songObject)
+        }
+    }
+    
+    private func songObject(status: Status, isPlaying playing: Bool) -> NSDictionary {
+        if let dict = status.raw as? NSMutableDictionary {
+            let playback = (dict["playback"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
+            if let imageFileUrl = status.imageFileUrl {
+                playback["artworkFilename"] = imageFileUrl.absoluteString
+            }
+            playback["isPlaying"] = playing
+            playback["updated"] = status.receivedAt.timeIntervalSince1970 * 1000
+            playback["sleepTime"] = self.sleepTimer.secondsToSleep()
+            
+            return playback
+        } else {
+            return NSDictionary()
+        }
     }
     
     

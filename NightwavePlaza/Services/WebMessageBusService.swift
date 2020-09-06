@@ -93,7 +93,7 @@ class WebMessageBus: NSObject, WKScriptMessageHandler {
         })
     }
     
-    private func jsObjectStringFromObject(object: Any?) -> String {
+    func jsObjectStringFromObject(object: Any?) -> String {
         do {
             guard let object = object else {
                 return "undefined";

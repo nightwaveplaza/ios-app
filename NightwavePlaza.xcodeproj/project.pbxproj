@@ -23,6 +23,7 @@
 		FA7069C8247A6FD900AFBD61 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069C7247A6FD900AFBD61 /* Status.swift */; };
 		FA75265625052E8B00C649BC /* BackgroundCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75265525052E8B00C649BC /* BackgroundCacheManager.swift */; };
 		FA75265925052ECB00C649BC /* RequestToDownloadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75265825052ECB00C649BC /* RequestToDownloadFile.swift */; };
+		FA75265B25055C6000C649BC /* SleepTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75265A25055C6000C649BC /* SleepTimerService.swift */; };
 		FA9A397D24D6C3CD00E6EF38 /* WebMessageBusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */; };
 		FAB2E1742504F7620026C008 /* StartMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E1732504F7620026C008 /* StartMenuHandler.swift */; };
 		FAB2E1762504F8840026C008 /* StartMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E1752504F8840026C008 /* StartMenuItem.swift */; };
@@ -79,6 +80,7 @@
 		FA7069C7247A6FD900AFBD61 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		FA75265525052E8B00C649BC /* BackgroundCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCacheManager.swift; sourceTree = "<group>"; };
 		FA75265825052ECB00C649BC /* RequestToDownloadFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToDownloadFile.swift; sourceTree = "<group>"; };
+		FA75265A25055C6000C649BC /* SleepTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimerService.swift; sourceTree = "<group>"; };
 		FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMessageBusService.swift; sourceTree = "<group>"; };
 		FAB2E1732504F7620026C008 /* StartMenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuHandler.swift; sourceTree = "<group>"; };
 		FAB2E1752504F8840026C008 /* StartMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuItem.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				FA2D1DAB24E8873F00EE0556 /* WebBridgeService.swift */,
 				FAB2E180250514650026C008 /* AuthStorage.swift */,
 				FA75265525052E8B00C649BC /* BackgroundCacheManager.swift */,
+				FA75265A25055C6000C649BC /* SleepTimerService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				FA0FFD5C2479B55F00C58CFE /* MainViewController.swift in Sources */,
 				FA0FFD582479B55F00C58CFE /* AppDelegate.swift in Sources */,
 				FAB2E1782504F8920026C008 /* StartMenuView.swift in Sources */,
+				FA75265B25055C6000C649BC /* SleepTimerService.swift in Sources */,
 				FACEC4B824E852AB00265659 /* WebMessage.swift in Sources */,
 				FA7069BD247A6A0C00AFBD61 /* RequestToGetStatus.swift in Sources */,
 				FA2D1DAC24E8873F00EE0556 /* WebBridgeService.swift in Sources */,

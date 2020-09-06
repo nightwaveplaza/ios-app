@@ -465,8 +465,8 @@ var iOSBridge = {
   audioStop: function audioStop() {
     return sendMessage('audioStop');
   },
-  setSleepTimer: function setSleepTimer() {
-    return sendMessage('setSleepTimer');
+  setSleepTimer: function setSleepTimer(time) {
+    return sendMessage('setSleepTimer', ["".concat(time)]);
   },
   getVote: function getVote() {
     return sendMessage('getVote');
