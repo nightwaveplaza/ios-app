@@ -66,7 +66,8 @@ class BackgroundCacheManager {
             pathExt = "mp4"
         }
         
-        return dir.appendingPathComponent("\(remoteUrl.hashValue).\(pathExt)")
+        let hash = (remoteUrl.absoluteString as NSString).sha1()!
+        return dir.appendingPathComponent("\(hash).\(pathExt)")
         
     }
     

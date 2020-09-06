@@ -25,6 +25,8 @@ target 'NightwavePlaza' do
   pod 'TRCAPIClient', :git => 'git@github.com:alexgarbarev/TRCAPIClient.git'
   pod 'TyphoonRestClient'
   pod 'PureLayout'
+  
+  pod 'NSString-Hash'
 
   
   target 'NightwavePlazaTests' do

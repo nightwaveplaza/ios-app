@@ -521,14 +521,10 @@ var iOSBridge = {
   },
   setBackground: function setBackground(background) {
     return sendMessage('setBackground', [background.video_src]);
-  } // background.src   setBackground: (background) => AndroidInterface.setBackground(background.src),
-
+  }
 };
 
 function sendMessage(name, args) {
-  console.log("Sending iOS Message \"".concat(name, "\""));
-  alert("Sending message: \"".concat(name, "\""));
-
   if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.plaza) {
     var callbackId = uuid__WEBPACK_IMPORTED_MODULE_0__["v4"]();
     window.webkit.messageHandlers.plaza.postMessage({
@@ -5444,7 +5440,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     set: function set(background) {
       this.currentBackground = background;
-      console.log("Current background: ", background);
       _bridge_native__WEBPACK_IMPORTED_MODULE_3__["Native"].setBackground(background);
     }
   }
