@@ -42,6 +42,7 @@ class WebBridgeService: NSObject, WebBusDelegate {
         webBus.delegate = self;
         statusService.status$.subscribe { [weak self] (event) in
             if let status = event.element as? Status {
+                self?.metadata.setMetadata(status: status)
                 self?.webBus.sendSongStatus(status: status, playing: self?.playback.paused == false)
             }
         }.disposed(by: disposeBag)
@@ -103,7 +104,10 @@ class WebBridgeService: NSObject, WebBusDelegate {
                 let url = URL(string: message.args[0])!
                 viewController?.backgroundView.setUrl(url: url)
             }
+            completion(nil, nil)
+        } else if message.name == "getUserAgent" {
             
+            completion("'NightwavePlaza iOS App'", nil)
         }
         
         else {

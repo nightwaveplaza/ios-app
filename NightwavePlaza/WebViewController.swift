@@ -12,7 +12,7 @@ import PureLayout
 import RxCocoa
 import RxSwift
 
-class WebViewController: UIViewController {
+class WebViewController: UIViewController, WKNavigationDelegate {
     
     let backgroundView = BackgroundView()
     let webView = WKWebView()
@@ -24,6 +24,8 @@ class WebViewController: UIViewController {
     private let metadata: MetadataService
     
     private let webBridge = WebBridgeService()
+    
+    private var selectionWasDisabled = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.playback = PlaybackService();
@@ -42,10 +44,10 @@ class WebViewController: UIViewController {
         self.view.addSubview(backgroundView)
         backgroundView.autoPinEdgesToSuperviewEdges()
         
-        self.setupWebView()
-        
         self.webBridge.setup(webView: self.webView, statusService: self.statusService, playback: self.playback, metadata: self.metadata);
         self.webBridge.viewController = self;
+        
+        self.setupWebView()
     }
     
     
@@ -54,6 +56,7 @@ class WebViewController: UIViewController {
         webView.autoPinEdgesToSuperviewEdges()
         webView.isOpaque = false
         webView.backgroundColor = .clear
+        webView.scrollView.isScrollEnabled = false
         
         let webPath = (Bundle.main.bundlePath as NSString).appendingPathComponent("web");
         let indexPath = (webPath as NSString).appendingPathComponent("index.html");
@@ -61,6 +64,22 @@ class WebViewController: UIViewController {
         let indexContent = try! NSString(contentsOfFile: indexPath, encoding: String.Encoding.utf8.rawValue);
  
         webView.loadHTMLString(indexContent as String, baseURL: URL(fileURLWithPath: webPath));
+        webView.navigationDelegate = self
+        
+        
+    }
+    
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
+        if selectionWasDisabled == false {
+            let javascriptStyle =
+            """
+                var css = 'input[type=text],input[type=password], input[type=email], input[type=number], input[type=time], input[type=date], textarea {-webkit-touch-callout: auto;-webkit-user-select: auto;} *{-webkit-touch-callout:none;-webkit-user-select:none}';
+                var head = document.head || document.getElementsByTagName('head')[0]; var style = document.createElement('style'); style.type = 'text/css'; style.appendChild(document.createTextNode(css)); head.appendChild(style);
+            """
+            webView.evaluateJavaScript(javascriptStyle, completionHandler: nil)
+            selectionWasDisabled = true
+        }
     }
     
 }

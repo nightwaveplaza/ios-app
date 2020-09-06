@@ -44,7 +44,6 @@ class StartMenuView: UIView {
                 view.autoPinEdge(toSuperviewEdge: .top)
             }
             
-            
             view.onTap({recognizer in
                 if (recognizer.state == .ended) {
                     self.onClick?(item)
@@ -78,6 +77,7 @@ class StartMenuView: UIView {
         let label = UILabel()
         label.text = item.title
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .black
         
         view.addSubview(label)
         label.autoAlignAxis(toSuperviewAxis: .horizontal)
