@@ -59,10 +59,12 @@ class WebBridgeService: NSObject, WebBusDelegate {
     
     func bindEvents() {
         webBus.delegate = self;
-        statusService.status$.subscribe { [weak self] (event) in
+        statusService.status$.subscribe { [unowned self] (event) in
             if let status = event.element as? Status {
-                self?.metadata.setMetadata(status: status)
-                self?.webBus.sendSongStatus(status: status, playing: self?.playback.paused == false)
+                self.metadata.setMetadata(status: status)
+                
+                let song = self.songObject(status: status, isPlaying: self.playback.paused == false)
+                self.webBus.sendMessage(name: "status", data: song)
             }
         }.disposed(by: disposeBag)
         
@@ -160,6 +162,7 @@ class WebBridgeService: NSObject, WebBusDelegate {
                 self.sleepTimer.sleepAfter(minutes: timeInMinutes)
             }
             completion(nil, nil)
+            self.sendCurrentStatus()
         }
         else if message.name == "getVote" {
             
@@ -170,7 +173,6 @@ class WebBridgeService: NSObject, WebBusDelegate {
             completion(nil, nil)
         }
         else if message.name == "showToast" {
-            print("Toast: \(message.args[0])")
             self.showTooltip(message.args[0])
             completion(nil, nil)
         }

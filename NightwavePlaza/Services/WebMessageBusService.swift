@@ -68,20 +68,6 @@ class WebMessageBus: NSObject, WKScriptMessageHandler {
         
     }
     
-    func sendSongStatus(status: Status, playing: Bool) {
-        if let dict = status.raw as? NSMutableDictionary {
-            let playback = (dict["playback"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
-            if let imageFileUrl = status.imageFileUrl {
-                playback["artworkFilename"] = imageFileUrl.absoluteString
-            }
-            playback["isPlaying"] = playing
-            playback["updated"] = status.receivedAt.timeIntervalSince1970 * 1000
-            
-            self.sendMessage(name: "status", data: playback)
-        }
-        
-    }
-    
     func sendMessage(name: String, data: Any?) {
 
         let dataString = self.jsObjectStringFromObject(object: data)
