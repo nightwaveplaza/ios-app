@@ -75,7 +75,7 @@ class WebMessageBus: NSObject, WKScriptMessageHandler {
                 playback["artworkFilename"] = imageFileUrl.absoluteString
             }
             playback["isPlaying"] = playing
-            playback["updated"] = status.updatedAt
+            playback["updated"] = status.receivedAt.timeIntervalSince1970 * 1000
             
             self.sendMessage(name: "status", data: playback)
         }

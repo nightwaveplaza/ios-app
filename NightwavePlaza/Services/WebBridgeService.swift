@@ -78,6 +78,10 @@ class WebBridgeService: NSObject, WebBusDelegate {
             completion(nil, nil)
         }
         
+        else {
+            print("Unhandled message: \(message.name)")
+        }
+        
     }
     
     
