@@ -12,7 +12,17 @@ import GestureRecognizerClosures
 
 class StartMenuView: UIView {
     
-    let itemHeight: CGFloat = 65.0
+    let itemHeight: CGFloat = 55.0
+    let itemSeparator: CGFloat = 1
+    let fontSize: CGFloat = 14
+    let iconSize: CGFloat = 32.0
+    let iconPadding: CGFloat = 10
+    
+    let menuWidth: CGFloat = 200
+    
+    let headerWidth: CGFloat = 25
+    let headerFontSize: CGFloat = 19
+    let headerLeftPadding: CGFloat = 15
     
     var onClick: ((_ item: StartMenuItem) -> Void)?
     
@@ -21,9 +31,7 @@ class StartMenuView: UIView {
         
         let bottomInset = viewController.bottomLayoutGuide.length
         var width =  CGFloat(viewController.view.bounds.size.width) / 2
-//        width = CGFloat.maximum(width, 230)
-//        width = CGFloat.minimum(width, 250)
-        width = 230 // Hardcoded width for now..
+        width = menuWidth // Hardcoded width for now..
         
         self.autoSetDimension(.height, toSize: CGFloat(CGFloat(items.count) * itemHeight + bottomInset))
         self.autoSetDimension(.width, toSize: width)
@@ -34,7 +42,7 @@ class StartMenuView: UIView {
         for item in items {
             let view = self.createViewForItem(item)
             self.addSubview(view)
-            view.autoPinEdge(toSuperviewEdge: .left, withInset: 30)
+            view.autoPinEdge(toSuperviewEdge: .left, withInset: headerWidth)
             view.autoPinEdge(toSuperviewEdge: .right)
             view.autoSetDimension(.height, toSize: itemHeight)
 
@@ -57,7 +65,7 @@ class StartMenuView: UIView {
         let view = self.createTitleView(leftInset: bottomInset)
         self.addSubview(view)
         view.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .right)
-        view.autoSetDimension(.width, toSize: 30)
+        view.autoSetDimension(.width, toSize: headerWidth)
         
     }
     
@@ -70,24 +78,24 @@ class StartMenuView: UIView {
         imageView.image = item.icon
         
         view.addSubview(imageView)
-        imageView.autoSetDimensions(to: CGSize(width: 40, height: 40))
+        imageView.autoSetDimensions(to: CGSize(width: iconSize, height: iconSize))
         imageView.autoAlignAxis(toSuperviewAxis: .horizontal)
-        imageView.autoPinEdge(toSuperviewEdge: .left, withInset: 14)
+        imageView.autoPinEdge(toSuperviewEdge: .left, withInset: iconPadding)
         
         let label = UILabel()
         label.text = item.title
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: fontSize)
         label.textColor = .black
         
         view.addSubview(label)
         label.autoAlignAxis(toSuperviewAxis: .horizontal)
-        label.autoPinEdge(.left, to: .right, of: imageView, withOffset: 14)
+        label.autoPinEdge(.left, to: .right, of: imageView, withOffset: iconPadding)
         
         if (item.hasBottomLine) {
             let separator = UIView()
             separator.backgroundColor = UIColor(hex: "AEAEAE")
             view.addSubview(separator)
-            separator.autoSetDimension(.height, toSize: 2)
+            separator.autoSetDimension(.height, toSize: itemSeparator)
             separator.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
         }
         
@@ -97,6 +105,8 @@ class StartMenuView: UIView {
     
     func createTitleView(leftInset: CGFloat) -> UIView {
         let view = StartMenuHeaderView()
+        view.fontSize = self.headerFontSize
+        view.leftPadding = self.headerLeftPadding
         view.leftInset = leftInset
         return view;
     }

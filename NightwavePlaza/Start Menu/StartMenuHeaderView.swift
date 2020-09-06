@@ -12,6 +12,22 @@ class StartMenuHeaderView: UIView {
    
     var leftInset: CGFloat = 0
     var gradientLayer: CAGradientLayer!
+    
+    var fontSize: CGFloat {
+        set {
+            self.label.font = UIFont.boldSystemFont(ofSize: newValue)
+        }
+        get {
+            return self.label.font.pointSize
+        }
+    }
+    
+    var leftPadding: CGFloat = 15 {
+        didSet {
+            self.setNeedsLayout()
+        }
+    }
+    
 
     var label: UILabel!
     
@@ -58,7 +74,7 @@ class StartMenuHeaderView: UIView {
         self.gradientLayer.frame = self.layer.bounds
 
         self.label.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi / 2))
-        self.label.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height - leftInset - 15)
+        self.label.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height - leftInset - self.leftPadding)
     }
     
 }
