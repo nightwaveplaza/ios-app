@@ -3,3 +3,6 @@
 //
 
 #import <TRCAPIClient/CCAPIClient.h>
+#import "CCKeychainStorage.h"
+#import "CCSingletoneStorage.h"
+#import "CCUserDefaultsStorage.h"

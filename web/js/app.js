@@ -445,14 +445,6 @@ var AndroidBridge = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "iOSBridge", function() { return iOSBridge; });
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 var CallbackKey = 'ios-callback';
 /**
@@ -527,16 +519,16 @@ var iOSBridge = {
   getAppVersion: function getAppVersion() {
     return sendMessage('getAppVersion');
   },
-  setBackground: function setBackground(_ref) {
-    var _ref2 = _slicedToArray(_ref, 1),
-        background = _ref2[0];
-
-    return sendMessage('setBackground');
+  setBackground: function setBackground(background) {
+    return sendMessage('setBackground', [background.video_src]);
   } // background.src   setBackground: (background) => AndroidInterface.setBackground(background.src),
 
 };
 
 function sendMessage(name, args) {
+  console.log("Sending iOS Message \"".concat(name, "\""));
+  alert("Sending message: \"".concat(name, "\""));
+
   if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.plaza) {
     var callbackId = uuid__WEBPACK_IMPORTED_MODULE_0__["v4"]();
     window.webkit.messageHandlers.plaza.postMessage({
@@ -996,28 +988,26 @@ var RTDATA_UPDATE_INTERVAL = 15000;
                 return _context.abrupt("return");
 
               case 2:
-                console.log("Player received a status: ", newStatus); // Не обновляем статус, если устаревший
-
                 if (!(newStatus.updated === 0)) {
-                  _context.next = 5;
+                  _context.next = 4;
                   break;
                 }
 
                 return _context.abrupt("return");
 
-              case 5:
+              case 4:
                 if (!(newStatus.artist === '' || newStatus.title === '')) {
-                  _context.next = 7;
+                  _context.next = 6;
                   break;
                 }
 
                 return _context.abrupt("return");
 
-              case 7:
+              case 6:
                 this.$emit('loaded');
 
                 if (!(newStatus.artist !== this.song.artist || newStatus.title !== this.song.title)) {
-                  _context.next = 20;
+                  _context.next = 19;
                   break;
                 }
 
@@ -1028,19 +1018,19 @@ var RTDATA_UPDATE_INTERVAL = 15000;
                 this.song.artworkFilename = newStatus.artworkFilename;
                 this.song.updated = newStatus.updated;
                 _context.t0 = this;
-                _context.next = 18;
+                _context.next = 17;
                 return _bridge_native__WEBPACK_IMPORTED_MODULE_1__["Native"].getVote();
 
-              case 18:
+              case 17:
                 _context.t1 = _context.sent;
 
                 _context.t0.setVote.call(_context.t0, _context.t1);
 
-              case 20:
+              case 19:
                 this.song.isPlaying = newStatus.isPlaying;
                 this.sleepTime = newStatus.sleepTime;
 
-              case 22:
+              case 21:
               case "end":
                 return _context.stop();
             }
@@ -5454,6 +5444,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     set: function set(background) {
       this.currentBackground = background;
+      console.log("Current background: ", background);
       _bridge_native__WEBPACK_IMPORTED_MODULE_3__["Native"].setBackground(background);
     }
   }

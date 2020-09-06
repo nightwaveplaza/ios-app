@@ -13,6 +13,8 @@ import RxSwift
 
 class WebBridgeService: NSObject, WebBusDelegate {
     
+    weak var viewController: WebViewController?
+    
     private var disposeBag = DisposeBag()
     
     private var statusService: StatusService!
@@ -41,7 +43,6 @@ class WebBridgeService: NSObject, WebBusDelegate {
         statusService.status$.subscribe { [weak self] (event) in
             if let status = event.element as? Status {
                 self?.webBus.sendSongStatus(status: status, playing: self?.playback.paused == false)
-//                self?.webBus.sendMessage(name: "status", data: status.raw)
             }
         }.disposed(by: disposeBag)
         
@@ -61,11 +62,11 @@ class WebBridgeService: NSObject, WebBusDelegate {
     }
     
     
-    func webBusDidReceiveMessage(message: WebMessage, completion: @escaping (NSObject?, String?) -> Void) {
-        print("Received a message: \(message.name)")
+    func webBusDidReceiveMessage(message: WebMessage, completion: @escaping (Any?, String?) -> Void) {
+        
+        print("Received message: \(message.name)")
         
         if message.name == "requestUiUpdate" {
-
             if let status = try? statusService.status$.value() {
                 self.webBus.sendSongStatus(status: status, playing: self.playback.paused == false)
             }
@@ -76,6 +77,33 @@ class WebBridgeService: NSObject, WebBusDelegate {
         } else if message.name == "audioStop" {
             self.playback.player.pause()
             completion(nil, nil)
+        } else if message.name == "openDrawer" {
+            if let controller = self.viewController {
+                StartMenuHandler.showMenu(
+                    inViewController: controller,
+                    onSelect: { action in
+                        self.webBus.sendMessage(name: "openWindow", data: [ "window": action ])
+                    
+                })
+            }
+            completion(nil, nil)
+        } else if message.name == "getAuthToken" {
+            if let token = AuthStorage.getKey() {
+                completion("'\(token)'", nil)
+            } else {
+                completion("''", nil)
+            }
+        } else if message.name == "setAuthToken" {
+            AuthStorage.storeKey(key: message.args[0] as NSString)
+            completion(nil, nil)
+        } else if message.name == "setBackground" {
+            if message.args[0] == "solid" {
+                viewController?.backgroundView.setSolid()
+            } else {
+                let url = URL(string: message.args[0])!
+                viewController?.backgroundView.setUrl(url: url)
+            }
+            
         }
         
         else {

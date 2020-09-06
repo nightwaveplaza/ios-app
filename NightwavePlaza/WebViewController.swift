@@ -14,6 +14,7 @@ import RxSwift
 
 class WebViewController: UIViewController {
     
+    let backgroundView = BackgroundView()
     let webView = WKWebView()
     
     private var disposeBag = DisposeBag()
@@ -37,15 +38,22 @@ class WebViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        
+        self.view.addSubview(backgroundView)
+        backgroundView.autoPinEdgesToSuperviewEdges()
+        
         self.setupWebView()
         
         self.webBridge.setup(webView: self.webView, statusService: self.statusService, playback: self.playback, metadata: self.metadata);
+        self.webBridge.viewController = self;
     }
     
     
     func setupWebView() {
         self.view.addSubview(webView);
         webView.autoPinEdgesToSuperviewEdges()
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
         
         let webPath = (Bundle.main.bundlePath as NSString).appendingPathComponent("web");
         let indexPath = (webPath as NSString).appendingPathComponent("index.html");

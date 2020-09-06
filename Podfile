@@ -11,7 +11,10 @@ target 'NightwavePlaza' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   
-  pod 'Kingfisher'
+  pod 'GestureRecognizerClosures', '~> 5'
+  
+  
+  component "SingletonStorage"
   
   # Pods for NightwavePlaza
   pod 'RxBiBinding'

@@ -22,6 +22,12 @@
 		FA7069C5247A6E8600AFBD61 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069C4247A6E8600AFBD61 /* RestClient.swift */; };
 		FA7069C8247A6FD900AFBD61 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7069C7247A6FD900AFBD61 /* Status.swift */; };
 		FA9A397D24D6C3CD00E6EF38 /* WebMessageBusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */; };
+		FAB2E1742504F7620026C008 /* StartMenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E1732504F7620026C008 /* StartMenuHandler.swift */; };
+		FAB2E1762504F8840026C008 /* StartMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E1752504F8840026C008 /* StartMenuItem.swift */; };
+		FAB2E1782504F8920026C008 /* StartMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E1772504F8920026C008 /* StartMenuView.swift */; };
+		FAB2E17D2504FDC80026C008 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E17C2504FDC80026C008 /* UIColor+hex.swift */; };
+		FAB2E17F25050B8C0026C008 /* StartMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E17E25050B8C0026C008 /* StartMenuHeaderView.swift */; };
+		FAB2E181250514650026C008 /* AuthStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E180250514650026C008 /* AuthStorage.swift */; };
 		FAC43AA224D6AB300073341F /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC43AA124D6AB300073341F /* Web.storyboard */; };
 		FAC43AA424D6AB520073341F /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC43AA324D6AB520073341F /* WebViewController.swift */; };
 		FAC43AA624D6AD940073341F /* web in Resources */ = {isa = PBXBuildFile; fileRef = FAC43AA524D6AD940073341F /* web */; };
@@ -70,6 +76,12 @@
 		FA7069C4247A6E8600AFBD61 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		FA7069C7247A6FD900AFBD61 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMessageBusService.swift; sourceTree = "<group>"; };
+		FAB2E1732504F7620026C008 /* StartMenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuHandler.swift; sourceTree = "<group>"; };
+		FAB2E1752504F8840026C008 /* StartMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuItem.swift; sourceTree = "<group>"; };
+		FAB2E1772504F8920026C008 /* StartMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuView.swift; sourceTree = "<group>"; };
+		FAB2E17C2504FDC80026C008 /* UIColor+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
+		FAB2E17E25050B8C0026C008 /* StartMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenuHeaderView.swift; sourceTree = "<group>"; };
+		FAB2E180250514650026C008 /* AuthStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStorage.swift; sourceTree = "<group>"; };
 		FAC43AA124D6AB300073341F /* Web.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Web.storyboard; sourceTree = "<group>"; };
 		FAC43AA324D6AB520073341F /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		FAC43AA524D6AD940073341F /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
@@ -185,6 +197,8 @@
 		FA0FFD562479B55F00C58CFE /* NightwavePlaza */ = {
 			isa = PBXGroup;
 			children = (
+				FAB2E1792504FDAF0026C008 /* Utils */,
+				FAB2E1722504F74F0026C008 /* Start Menu */,
 				FAE41EF8247A85B90076D927 /* Services */,
 				FA0FFD572479B55F00C58CFE /* AppDelegate.swift */,
 				FA0FFD5B2479B55F00C58CFE /* MainViewController.swift */,
@@ -227,6 +241,25 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		FAB2E1722504F74F0026C008 /* Start Menu */ = {
+			isa = PBXGroup;
+			children = (
+				FAB2E1732504F7620026C008 /* StartMenuHandler.swift */,
+				FAB2E1752504F8840026C008 /* StartMenuItem.swift */,
+				FAB2E1772504F8920026C008 /* StartMenuView.swift */,
+				FAB2E17E25050B8C0026C008 /* StartMenuHeaderView.swift */,
+			);
+			path = "Start Menu";
+			sourceTree = "<group>";
+		};
+		FAB2E1792504FDAF0026C008 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FAB2E17C2504FDC80026C008 /* UIColor+hex.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		FAE41EF8247A85B90076D927 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +268,7 @@
 				FAE41F00247AA4A10076D927 /* PlaybackService.swift */,
 				FA9A397C24D6C3CD00E6EF38 /* WebMessageBusService.swift */,
 				FA2D1DAB24E8873F00EE0556 /* WebBridgeService.swift */,
+				FAB2E180250514650026C008 /* AuthStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -444,16 +478,22 @@
 				FA7069C5247A6E8600AFBD61 /* RestClient.swift in Sources */,
 				FAE41F05247ACFA90076D927 /* BackgroundView.swift in Sources */,
 				FA9A397D24D6C3CD00E6EF38 /* WebMessageBusService.swift in Sources */,
+				FAB2E1742504F7620026C008 /* StartMenuHandler.swift in Sources */,
 				FAE41F08247ADA570076D927 /* RequestToGetBackgrounds.swift in Sources */,
 				FAE41EFD247A8B7C0076D927 /* RequestToGetImage.swift in Sources */,
+				FAB2E181250514650026C008 /* AuthStorage.swift in Sources */,
 				FAE41EFF247AA47B0076D927 /* MetadataService.swift in Sources */,
+				FAB2E1762504F8840026C008 /* StartMenuItem.swift in Sources */,
 				FAE41F01247AA4A10076D927 /* PlaybackService.swift in Sources */,
+				FAB2E17F25050B8C0026C008 /* StartMenuHeaderView.swift in Sources */,
 				FA7069C8247A6FD900AFBD61 /* Status.swift in Sources */,
 				FA0FFD5C2479B55F00C58CFE /* MainViewController.swift in Sources */,
 				FA0FFD582479B55F00C58CFE /* AppDelegate.swift in Sources */,
+				FAB2E1782504F8920026C008 /* StartMenuView.swift in Sources */,
 				FACEC4B824E852AB00265659 /* WebMessage.swift in Sources */,
 				FA7069BD247A6A0C00AFBD61 /* RequestToGetStatus.swift in Sources */,
 				FA2D1DAC24E8873F00EE0556 /* WebBridgeService.swift in Sources */,
+				FAB2E17D2504FDC80026C008 /* UIColor+hex.swift in Sources */,
 				FAC43AA424D6AB520073341F /* WebViewController.swift in Sources */,
 				FAE41EFB247A85E40076D927 /* StatusService.swift in Sources */,
 			);

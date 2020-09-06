@@ -24,7 +24,7 @@ class WebMessage: NSObject, Codable {
 }
 
 @objc protocol WebBusDelegate: NSObjectProtocol {
-    func webBusDidReceiveMessage(message: WebMessage, completion: @escaping (NSObject?, String?) -> Void);
+    func webBusDidReceiveMessage(message: WebMessage, completion: @escaping (Any?, String?) -> Void);
 }
 
 
@@ -57,11 +57,11 @@ class WebMessageBus: NSObject, WKScriptMessageHandler {
             let resultValue = self.jsObjectStringFromObject(object: result);
             let jsMessage = "window['ios-callback']['\(decoded.callbackId)'](\(resultValue), \(errorMessage)); 'ok'; "
             self.webView?.evaluateJavaScript(jsMessage, completionHandler: { (res, err) in
-                print("Callback Result: \(String(describing: res))")
+//                print("Callback Result: \(String(describing: res))")
                 if err != nil {
                     print("Unable to send js message: \(jsMessage). Error = \(String(describing: err))")
                 } else {
-                    print("Return value called: \(jsMessage)");
+//                    print("Return value called: \(jsMessage)");
                 }
             });
         });
@@ -97,6 +97,9 @@ class WebMessageBus: NSObject, WKScriptMessageHandler {
         do {
             guard let object = object else {
                 return "undefined";
+            }
+            if let str = object as? String {
+                return str;
             }
             let jsonData = try JSONSerialization.data(withJSONObject: object, options: [])
             return String(data: jsonData, encoding: .utf8)!

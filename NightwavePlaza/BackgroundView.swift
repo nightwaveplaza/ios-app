@@ -14,10 +14,21 @@ class BackgroundView: UIView {
     
     private var player = AVPlayer()
     private var playerLayer = AVPlayerLayer()
+    private var solidColor = UIColor(hex: "008B8B")
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    func commonInit() {
         
+        self.backgroundColor = self.solidColor
         self.layer.addSublayer(playerLayer)
         playerLayer.player = player
         playerLayer.videoGravity = .resizeAspectFill
@@ -33,6 +44,8 @@ class BackgroundView: UIView {
     var disposeBag = DisposeBag()
     
     func setUrl(url: URL) {
+        self.backgroundColor = UIColor.black
+        playerLayer.isHidden = false
         
         let nextPlayer = AVPlayer(url: url)
         nextPlayer.actionAtItemEnd = .none
@@ -41,6 +54,13 @@ class BackgroundView: UIView {
             self.replacePlayer(player: nextPlayer)
         }
         
+    }
+    
+    func setSolid() {
+        self.backgroundColor = self.solidColor
+        player.rate = 0
+        playerLayer.isHidden = true
+        playerLayer.player = nil
     }
     
     private func startPlayer(player: AVPlayer, completion: @escaping () -> ()) {

@@ -1,8 +1,16 @@
 PODS:
+  - ComponentsHub/Macroses (0.0.7):
+    - libextobjc/EXTScope
+  - ComponentsHub/SingletonStorage (0.0.7):
+    - ComponentsHub/Macroses
+    - FastCoding
+    - SAMKeychain
   - Differentiator (4.0.1)
-  - Kingfisher (5.14.1):
-    - Kingfisher/Core (= 5.14.1)
-  - Kingfisher/Core (5.14.1)
+  - FastCoding (3.3)
+  - GestureRecognizerClosures (5.0.0)
+  - libextobjc/EXTScope (0.6):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/RuntimeExtensions (0.6)
   - PureLayout (3.1.6)
   - RxBiBinding (0.2.5):
     - RxCocoa (~> 5.0)
@@ -17,12 +25,14 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
+  - SAMKeychain (1.5.3)
   - TRCAPIClient (0.0.1):
     - TyphoonRestClient
   - TyphoonRestClient (1.8.0)
 
 DEPENDENCIES:
-  - Kingfisher
+  - "ComponentsHub/SingletonStorage (from `git@github.com:alexgarbarev/ios-hub.git`)"
+  - GestureRecognizerClosures (~> 5)
   - PureLayout
   - RxBiBinding
   - RxCocoa
@@ -34,36 +44,48 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Differentiator
-    - Kingfisher
+    - FastCoding
+    - GestureRecognizerClosures
+    - libextobjc
     - PureLayout
     - RxBiBinding
     - RxCocoa
     - RxDataSources
     - RxRelay
     - RxSwift
+    - SAMKeychain
     - TyphoonRestClient
 
 EXTERNAL SOURCES:
+  ComponentsHub:
+    :git: "git@github.com:alexgarbarev/ios-hub.git"
   TRCAPIClient:
     :git: "git@github.com:alexgarbarev/TRCAPIClient.git"
 
 CHECKOUT OPTIONS:
+  ComponentsHub:
+    :commit: e9f0c60a2030dfeb40a3b478eb236b4098433f11
+    :git: "git@github.com:alexgarbarev/ios-hub.git"
   TRCAPIClient:
     :commit: 7227b084606950aa7d0c77cbf621c873b16bede6
     :git: "git@github.com:alexgarbarev/TRCAPIClient.git"
 
 SPEC CHECKSUMS:
+  ComponentsHub: a895e3bf505ccc32620b338647984a9270b161c3
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
-  Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
+  FastCoding: 3b590f7143a229780fa744b35084d85d9461587e
+  GestureRecognizerClosures: 0dcafb45e669e7a775c840383e54b3d16983037b
+  libextobjc: aed8b7d2b07f511c1a7ecaacb33ea03e327c69b7
   PureLayout: bd3c4ec3a3819ad387c99ebb72c6b129c3ed4d2d
   RxBiBinding: 6cc627d9e0dfa0b2ce8470cd7e539f3cb100f782
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   TRCAPIClient: e190f6c0966471b8ae31f8f77ed3c75cfc282a94
   TyphoonRestClient: 262167748e32dbe25c6669e48c1559379841bd9c
 
-PODFILE CHECKSUM: c637f103b8253a849c3b463c3c1745b8dee0b0e7
+PODFILE CHECKSUM: e4f73a9f3100c533fe83b9e7ba7848e3c133ca96
 
 COCOAPODS: 1.9.2
