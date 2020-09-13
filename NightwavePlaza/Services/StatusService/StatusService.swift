@@ -57,9 +57,11 @@ class StatusService: NSObject {
         return Observable.create({ (observer) -> Cancelable in
             let handler = RestClient.shared.restClient.send(RequestToGetStatus()) { (res: Any?, err: Error?) in
                 if let status = res as? Status {
+                    print("New Status Received: \(status)")
                     observer.onNext(status)
                 }
                 else if let error = err {
+                    print("StatusError: \(error)")
                     observer.onError(error)
                 }
                 observer.onCompleted()

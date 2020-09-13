@@ -42,7 +42,7 @@ class BackgroundView: UIView {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeForeground(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
         
-        cache.precacheAll()
+        cache.precacheAllOnWifi()
     }
     
     var disposeBag = DisposeBag()

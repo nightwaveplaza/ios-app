@@ -189,7 +189,7 @@ class WebBridgeService: NSObject, WebBusDelegate {
     }
     
     private func songObject(status: Status, isPlaying playing: Bool) -> NSDictionary {
-        if let dict = status.raw as? NSMutableDictionary {
+        if let dict = status.raw as? NSDictionary {
             let playback = (dict["playback"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
             if let imageFileUrl = status.imageFileUrl {
                 playback["artworkFilename"] = imageFileUrl.absoluteString

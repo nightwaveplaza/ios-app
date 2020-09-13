@@ -10,6 +10,7 @@
 		1423C062E6237B5ECBCD415F /* Pods_NightwavePlazaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51012A0A3FBB1E50EB8492A /* Pods_NightwavePlazaTests.framework */; };
 		933DA3AF9F6C2A968A6B5170 /* RequestToGetStatus.response.json in Resources */ = {isa = PBXBuildFile; fileRef = 9043FCADF85B8DB664F713DF /* RequestToGetStatus.response.json */; };
 		BEB913665039D0E3E6C53ECA /* Pods_NightwavePlaza.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4221990D687A9AC1A612E781 /* Pods_NightwavePlaza.framework */; };
+		FA0605D0250E463D001C3C46 /* LastFmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0605CF250E463D001C3C46 /* LastFmService.swift */; };
 		FA0FFD582479B55F00C58CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FFD572479B55F00C58CFE /* AppDelegate.swift */; };
 		FA0FFD5C2479B55F00C58CFE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FFD5B2479B55F00C58CFE /* MainViewController.swift */; };
 		FA0FFD5F2479B55F00C58CFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0FFD5D2479B55F00C58CFE /* Main.storyboard */; };
@@ -64,7 +65,8 @@
 		9043FCADF85B8DB664F713DF /* RequestToGetStatus.response.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = RequestToGetStatus.response.json; sourceTree = "<group>"; };
 		A51012A0A3FBB1E50EB8492A /* Pods_NightwavePlazaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NightwavePlazaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95CDEDCCCFCE1314198CB8F /* Pods-NightwavePlazaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NightwavePlazaTests.debug.xcconfig"; path = "Target Support Files/Pods-NightwavePlazaTests/Pods-NightwavePlazaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FA0FFD542479B55F00C58CFE /* NightwavePlaza.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightwavePlaza.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0605CF250E463D001C3C46 /* LastFmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFmService.swift; sourceTree = "<group>"; };
+		FA0FFD542479B55F00C58CFE /* Nightwave Plaza.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nightwave Plaza.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0FFD572479B55F00C58CFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA0FFD5B2479B55F00C58CFE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FA0FFD5E2479B55F00C58CFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -199,7 +201,7 @@
 		FA0FFD552479B55F00C58CFE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FA0FFD542479B55F00C58CFE /* NightwavePlaza.app */,
+				FA0FFD542479B55F00C58CFE /* Nightwave Plaza.app */,
 				FA0FFD6A2479B56100C58CFE /* NightwavePlazaTests.xctest */,
 			);
 			name = Products;
@@ -300,6 +302,7 @@
 				FAB2E180250514650026C008 /* AuthStorage.swift */,
 				FA75265525052E8B00C649BC /* BackgroundCacheManager.swift */,
 				FA75265A25055C6000C649BC /* SleepTimerService.swift */,
+				FA0605CF250E463D001C3C46 /* LastFmService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -351,7 +354,7 @@
 			);
 			name = NightwavePlaza;
 			productName = NightwavePlaza;
-			productReference = FA0FFD542479B55F00C58CFE /* NightwavePlaza.app */;
+			productReference = FA0FFD542479B55F00C58CFE /* Nightwave Plaza.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FA0FFD692479B56100C58CFE /* NightwavePlazaTests */ = {
@@ -527,6 +530,7 @@
 				FACEC4B824E852AB00265659 /* WebMessage.swift in Sources */,
 				FA75266025056D4800C649BC /* UIKitExtensions.swift in Sources */,
 				FA7069BD247A6A0C00AFBD61 /* RequestToGetStatus.swift in Sources */,
+				FA0605D0250E463D001C3C46 /* LastFmService.swift in Sources */,
 				FA2D1DAC24E8873F00EE0556 /* WebBridgeService.swift in Sources */,
 				FAB2E17D2504FDC80026C008 /* UIColor+hex.swift in Sources */,
 				FAC43AA424D6AB520073341F /* WebViewController.swift in Sources */,
@@ -702,7 +706,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nightwaveplaza.NightwavePlaza;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Nightwave Plaza";
 				SWIFT_OBJC_BRIDGING_HEADER = "NightwavePlaza/Network/NightwavePlaza-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -725,7 +729,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nightwaveplaza.NightwavePlaza;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Nightwave Plaza";
 				SWIFT_OBJC_BRIDGING_HEADER = "NightwavePlaza/Network/NightwavePlaza-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

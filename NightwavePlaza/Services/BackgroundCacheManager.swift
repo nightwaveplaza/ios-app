@@ -7,15 +7,37 @@
 //
 
 import Foundation
-
+import Reachability
 
 class BackgroundCacheManager {
     
     static let shared = BackgroundCacheManager()
     
+    let reachability = try! Reachability()
+    var shouldPrecache = true
+
+    func precacheAllOnWifi() {
+        
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                if self.shouldPrecache {
+                    self.precacheAll()
+                    self.shouldPrecache = false;
+                }
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+        
+    }
+    
     func precacheAll() {
         RestClient.shared.restClient.send(RequestToGetBackgrounds()) {[unowned self] (result, error) in
-            
+
             if let bg = result as? [[String: Any]] {
                 for bgItem in bg {
                     let videoUrl = URL(string: bgItem["video_src"] as! String)!

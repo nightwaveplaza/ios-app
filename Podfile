@@ -26,6 +26,8 @@ target 'NightwavePlaza' do
   pod 'TyphoonRestClient'
   pod 'PureLayout'
   
+  pod 'ReachabilitySwift'
+  
   pod 'NSString-Hash'
 
   
