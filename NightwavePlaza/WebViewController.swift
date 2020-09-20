@@ -28,7 +28,6 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     private var selectionWasDisabled = false
     
     var fullScreenStorage = CCUserDefaultsStorage(with: NSNumber.self, key: "fullScreen")
-    
     var fullScreen: Bool {
         set {
             
@@ -42,6 +41,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             }
         }
     }
+    
+    var timer: Timer?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.playback = PlaybackService();
@@ -63,6 +64,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         self.webBridge.setup(webView: self.webView, statusService: self.statusService, playback: self.playback, metadata: self.metadata, viewController: self);
         
         self.setupWebView()
+        self.setupTimer()
     }
     
     
@@ -82,6 +84,21 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         
         
+    }
+    
+    
+    private func setupTimer() {
+        self.timer = Timer(fire: Date(), interval: 1, repeats: true, block: { [weak self] (timer) in
+            do {
+                let status = try self?.statusService.status$.value()
+                if let status = status {
+                    self?.metadata.setMetadata(status: status)
+                }
+            } catch { }
+        })
+        if let timer = self.timer {
+            RunLoop.current.add(timer, forMode: .default);
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

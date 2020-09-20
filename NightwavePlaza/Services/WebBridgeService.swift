@@ -55,6 +55,12 @@ class WebBridgeService: NSObject, WebBusDelegate {
     
     func bindEvents() {
         webBus.delegate = self;
+        
+        
+        playback.playbackRate$.subscribe({ [unowned self] (event) in
+            self.sendCurrentStatus()
+        }).disposed(by: disposeBag)
+        
         statusService.status$.subscribe { [unowned self] (event) in
             if let status = event.element as? Status {
                 self.metadata.setMetadata(status: status)
@@ -76,6 +82,8 @@ class WebBridgeService: NSObject, WebBusDelegate {
                
            }
        }).disposed(by: disposeBag)
+        
+        
         
     }
     

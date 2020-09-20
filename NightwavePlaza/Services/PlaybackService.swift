@@ -9,6 +9,8 @@
 import Foundation
 import AVFoundation
 import MediaPlayer
+import RxSwift
+import RxCocoa
 
 enum PlaybackQuality: Int {
     case High = 0
@@ -33,6 +35,8 @@ class PlaybackService {
         }
     }
     
+    var playbackRate$ = BehaviorSubject<Float>(value: 0)
+    
     var player = AVPlayer(url: URL(string: "https://radio.plaza.one/mp3")!)
     
     init() {
@@ -49,6 +53,7 @@ class PlaybackService {
         } else {
             player.play()
         }
+        self.playbackRate$.onNext(player.rate)
     }
     
     var paused: Bool {
@@ -102,6 +107,7 @@ class PlaybackService {
         commandCenter.playCommand.addTarget { [unowned self] event in
             if self.player.rate == 0.0 {
                 self.player.play()
+                self.playbackRate$.onNext(self.player.rate)
                 return .success
             }
             return .commandFailed
@@ -110,6 +116,7 @@ class PlaybackService {
         commandCenter.pauseCommand.addTarget { [unowned self] event in
             if self.player.rate == 1.0 {
                 self.player.pause()
+                self.playbackRate$.onNext(self.player.rate)
                 return .success
             }
             return .commandFailed
