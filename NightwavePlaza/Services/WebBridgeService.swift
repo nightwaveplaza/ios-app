@@ -180,7 +180,26 @@ class WebBridgeService: NSObject, WebBusDelegate {
             self.showTooltip(message.args[0])
             completion(nil, nil)
         }
- 
+        else if message.name == "setLastfmToken" {
+            let account = LastFmAccount(token: message.args[0] as NSString, username: message.args[1] as NSString)
+            LastFmService.storeAccount(account: account)
+            completion(nil, nil)
+        }
+        else if message.name == "getLastfmUsername" {
+            if let account = LastFmService.getAccount() {
+                completion("'\(account.username ?? "")'", nil)
+            } else {
+                completion("''", nil)
+            }
+        }
+        else if message.name == "getLastfmStatus" {
+            if let status = self.viewController?.lastFmService.status {
+                completion("'\(status.rawValue)'", nil)
+            } else {
+                 completion("''", nil)
+            }
+        }
+            
         else {
             print("Unhandled message: \(message.name)")
         }

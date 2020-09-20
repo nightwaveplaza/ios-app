@@ -17,11 +17,14 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     let backgroundView = BackgroundView()
     let webView = WKWebView()
     
+    let lastFmService: LastFmService
+    
     private var disposeBag = DisposeBag()
     
     private let statusService = StatusService()
     private let playback: PlaybackService
     private let metadata: MetadataService
+
     
     private let webBridge = WebBridgeService()
     
@@ -47,12 +50,14 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.playback = PlaybackService();
         self.metadata = MetadataService(playback: playback)
+        self.lastFmService = LastFmService(playback: self.playback, status: self.statusService)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init?(coder: NSCoder) {
         self.playback = PlaybackService();
         self.metadata = MetadataService(playback: playback)
+        self.lastFmService = LastFmService(playback: self.playback, status: self.statusService)
         super.init(coder: coder)
     }
     
