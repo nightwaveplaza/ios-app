@@ -56,6 +56,16 @@ class PlaybackService {
         self.playbackRate$.onNext(player.rate)
     }
     
+    func play() {
+        player.play()
+        self.playbackRate$.onNext(player.rate)
+    }
+    
+    func pause() {
+        player.pause()
+        self.playbackRate$.onNext(player.rate)
+    }
+    
     var paused: Bool {
         get {
             return self.player.timeControlStatus == AVPlayer.TimeControlStatus.paused
@@ -106,8 +116,7 @@ class PlaybackService {
         
         commandCenter.playCommand.addTarget { [unowned self] event in
             if self.player.rate == 0.0 {
-                self.player.play()
-                self.playbackRate$.onNext(self.player.rate)
+                self.play()
                 return .success
             }
             return .commandFailed
@@ -115,8 +124,7 @@ class PlaybackService {
         
         commandCenter.pauseCommand.addTarget { [unowned self] event in
             if self.player.rate == 1.0 {
-                self.player.pause()
-                self.playbackRate$.onNext(self.player.rate)
+                self.pause()
                 return .success
             }
             return .commandFailed

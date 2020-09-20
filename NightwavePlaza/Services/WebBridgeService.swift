@@ -102,10 +102,10 @@ class WebBridgeService: NSObject, WebBusDelegate {
             completion(nil, nil)
           }
         } else if message.name == "audioPlay" {
-            self.playback.player.play()
+            self.playback.play()
             completion(nil, nil)
         } else if message.name == "audioStop" {
-            self.playback.player.pause()
+            self.playback.pause()
             completion(nil, nil)
         } else if message.name == "openDrawer" {
             if let controller = self.viewController {
