@@ -11,6 +11,7 @@ import AVFoundation
 import MediaPlayer
 import RxSwift
 import RxCocoa
+import Reachability
 
 enum PlaybackQuality: Int {
     case High = 0
@@ -43,9 +44,34 @@ class PlaybackService {
         self.setupPlaybackSession()
         self.setupRemoteTransportControls()
 
-        self.replacePlayerForQuality()        
+        self.replacePlayerForQuality()
+        // Doesnt seems to work:
+//        self.resumePlaybackWhenBecomeReachable()
     }
     
+    let reachability = try! Reachability()
+
+    var playerRateWhenUnreachable: Float = 0
+
+    
+    func resumePlaybackWhenBecomeReachable() {
+        
+        reachability.whenReachable = { [unowned self] reachability in
+            self.player.rate = self.playerRateWhenUnreachable;
+        }
+        reachability.whenUnreachable = { [unowned self] reachability in
+            self.playerRateWhenUnreachable = self.player.rate;
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+        
+    }
+    
+    // Not used anymore.. Remove?
     func toggle() {
         
         if (player.rate == 1) {
@@ -59,11 +85,13 @@ class PlaybackService {
     func play() {
         player.play()
         self.playbackRate$.onNext(player.rate)
+        playerRateWhenUnreachable = 1;
     }
     
     func pause() {
         player.pause()
         self.playbackRate$.onNext(player.rate)
+        playerRateWhenUnreachable = 0;
     }
     
     var paused: Bool {

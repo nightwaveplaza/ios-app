@@ -96,7 +96,6 @@ class LastFmService {
         guard let token = LastFmService.getAccount()?.token else {
             return
         }
-        print("Now Playing: \(playback.album) / \(playback.title)")
         
         let request = RequestToNowPlaying()
         request.token = token as String

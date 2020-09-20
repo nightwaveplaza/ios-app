@@ -11,7 +11,7 @@
         <!--Web View Controller-->
         <scene sceneID="YcB-vG-1AQ">
             <objects>
-                <viewController id="2Wx-ZQ-egO" customClass="WebViewController" customModule="NightwavePlaza" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2Wx-ZQ-egO" customClass="WebViewController" customModule="Nightwave_Plaza" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Jf-2g-cEv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

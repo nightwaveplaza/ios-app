@@ -11,6 +11,7 @@ import WebKit
 import PureLayout
 import RxCocoa
 import RxSwift
+import SafariServices
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     
@@ -139,6 +140,33 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         print("WebViewError: didFailProvisionalNavigation \(String(describing: navigation)), Error = \(error)");
 
     }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        if let url = navigationAction.request.url, url.scheme == "mailto" {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                let error = UIAlertController(title: "Error", message: "Unable to compose mail. Please check mail configuration and try again", preferredStyle: .alert);
+                error.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [unowned error] (_action) in
+                    error.dismiss(animated: true, completion: nil)
+                }))
+                self.present(error, animated: true, completion: nil)
+            }
+            decisionHandler(.cancel)
+        } else if let url = navigationAction.request.url, url.scheme?.hasPrefix("http") == true {
+            let controller = SFSafariViewController(url: url)
+            self.present(controller, animated: true, completion: nil)
+            
+            decisionHandler(.cancel)
+        }
+        else {
+            decisionHandler(.allow)
+        }
+
+    }
+
+
     
 }
 
