@@ -12,7 +12,70 @@ import GestureRecognizerClosures
 
 class StartMenuHandler {
     
-    static func menuItems() -> [StartMenuItem] {
+    weak var viewController: UIViewController!
+    var view: StartMenuView!
+    let darkView = UIView()
+    var left: NSLayoutConstraint?;
+    
+    var isMenuOpened = false
+    
+    var openMenuGesture: UIPanGestureRecognizer!
+    
+    var onSelect: ((_ action: String) -> Void)?
+
+    
+    func setup(inViewController viewController: UIViewController, onSelect block: @escaping (_ action: String) -> Void) {
+         self.viewController = viewController
+        openMenuGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        self.viewController!.view.addGestureRecognizer(openMenuGesture)
+        self.onSelect = block
+    }
+    
+    func setupMenuIfNeeded() {
+        
+        if view != nil {
+            return
+        }
+        
+        UIView.setAnimationsEnabled(false)
+        
+        view = StartMenuView()
+        
+        view.setup(items: self.menuItems(), viewController: self.viewController)
+        
+        darkView.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+        
+        self.viewController.view.addSubview(darkView);
+        darkView.autoPinEdgesToSuperviewEdges()
+        
+        self.viewController.view.addSubview(view);
+        
+        NSLayoutConstraint.autoSetPriority(.defaultHigh) {
+            left = view.autoPinEdge(toSuperviewEdge: .left)
+        }
+        
+        view.autoPinEdge(toSuperviewEdge: .bottom)
+        view.updateConstraints()
+        view.layoutIfNeeded()
+        left?.constant = -view.bounds.size.width;
+        
+        self.viewController.view.layoutIfNeeded()
+       
+        
+        darkView.onTap { [unowned self] (handler) in
+            self.dissmiss()
+        }
+        
+        view.onClick = { item in
+            self.onSelect?(item.targetAction)
+            self.dissmiss()
+        }
+        
+        UIView.setAnimationsEnabled(true)
+        
+    }
+    
+    func menuItems() -> [StartMenuItem] {
         return [
             StartMenuItem(icon: UIImage(named: "ic_ratings"), title: "Ratings", targetAction: "ratings", hasBottomLine: true),
             StartMenuItem(icon: UIImage(named: "ic_favorites"), title: "My Favorites", targetAction: "user-favorites", hasBottomLine: false),
@@ -23,67 +86,103 @@ class StartMenuHandler {
         ]
     }
     
-    static func showMenu(inViewController viewController: UIViewController, onSelect block: @escaping (_ action: String) -> Void) {
-    
-        let view = StartMenuView()
-        view.setup(items: self.menuItems(), viewController: viewController)
+    func show() {
+        self.setupMenuIfNeeded()
         
-        let darkView = UIView()
-        darkView.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+        viewController!.view.bringSubviewToFront(self.darkView)
+        viewController!.view.bringSubviewToFront(self.view)
+        self.darkView.isHidden = false
         
-        viewController.view.addSubview(darkView);
-        darkView.autoPinEdgesToSuperviewEdges()
-    
-        viewController.view.addSubview(view);
-        
-        var left: NSLayoutConstraint?;
-        NSLayoutConstraint.autoSetPriority(.defaultHigh) {
-            left = view.autoPinEdge(toSuperviewEdge: .left)
-        }
-        
-        view.autoPinEdge(toSuperviewEdge: .bottom)
-        view.updateConstraints()
-        view.layoutIfNeeded()
-        left?.constant = -view.bounds.size.width;
-
-        self.animatePresentation(darkView: darkView, menuView: view, left: left)
-        
-        view.onClick = { item in
-            block(item.targetAction)
-            self.animateDismiss(darkView: darkView, menuView: view, left: left)
-        }
-        
-        darkView.onTap { (handler) in
-            self.animateDismiss(darkView: darkView, menuView: view, left: left)
-        }
-    }
-    
-    static func animatePresentation(darkView: UIView, menuView: UIView, left: NSLayoutConstraint?) {
-        menuView.superview!.layoutIfNeeded()
+        viewController!.view.layoutIfNeeded()
         UIView.setAnimationCurve(.easeInOut)
-        UIView.animate(withDuration: 0.2, animations: {
-            darkView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-            left?.constant = 0;
-            menuView.superview!.layoutIfNeeded()
-        }) { (finished) in
-
+        UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+            self.darkView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+            self.left?.constant = 0;
+            self.viewController!.view.layoutIfNeeded()
+        }) {  [unowned self] (finished) in
+            self.isMenuOpened = true
         }
     }
     
-    static func animateDismiss(darkView: UIView, menuView: UIView, left: NSLayoutConstraint?) {
-        menuView.superview!.layoutIfNeeded()
+    func dissmiss() {
+        self.viewController!.view.layoutIfNeeded()
         UIView.setAnimationCurve(.easeInOut)
-        UIView.animate(withDuration: 0.2, animations: {
-            darkView.backgroundColor = UIColor.black.withAlphaComponent(0.0)
-            left?.constant = -menuView.bounds.size.width;
-            menuView.superview!.layoutIfNeeded()
-        }) { (finished) in
-            darkView.removeFromSuperview()
-            menuView.removeFromSuperview()
+        UIView.animate(withDuration: 0.2, animations: { [unowned self] in
+            self.darkView.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+            self.left?.constant = -self.view.bounds.size.width;
+            self.view.superview!.layoutIfNeeded()
+        }) {  [unowned self] (finished) in
+            self.darkView.isHidden = true
+            self.isMenuOpened = false
         }
     }
     
+    func toggleMenu() {
+        
+        if isMenuOpened {
+            self.darkView.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+            self.left?.constant = -self.view.bounds.size.width;
+            self.view.superview!.layoutIfNeeded()
+        } else {
+            self.darkView.isHidden = false
+            self.darkView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+            self.left?.constant = 0;
+            self.viewController!.view.layoutIfNeeded()
+        }
+    }
     
+    func updateForCurrentState() {
+        self.setupMenuIfNeeded()
+        viewController!.view.bringSubviewToFront(self.darkView)
+        viewController!.view.bringSubviewToFront(self.view)
+        
+        if isMenuOpened {
+            self.left?.constant = 0;
+            self.darkView.isHidden = false
+        } else {
+            self.left?.constant = -self.view.bounds.size.width;
+            self.darkView.isHidden = true
+        }
+        self.view.superview!.layoutIfNeeded()
+    }
     
+    private var animator = UIViewPropertyAnimator()
+
+    @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            if !isMenuOpened && recognizer.location(in: recognizer.view).x > 50 {
+                recognizer.isEnabled = false
+                recognizer.isEnabled = true
+                break
+            }
+            self.updateForCurrentState()
+            animator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
+                self.toggleMenu()
+            })
+            animator.startAnimation()
+            animator.pauseAnimation()
+            break
+        case .changed:
+            var fraction = recognizer.translation(in: recognizer.view).x / self.view.bounds.size.width
+            if self.isMenuOpened {
+                fraction = -fraction;
+            }
+            animator.fractionComplete = fraction
+            break
+        case .ended:
+            animator.isReversed = animator.fractionComplete < 0.5
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            animator.addCompletion { (position) in
+                if self.animator.isReversed == false {
+                    self.isMenuOpened = !self.isMenuOpened
+                }
+                self.updateForCurrentState()
+            }
+            break
+        @unknown default:
+            ()
+        }
+    }
     
 }

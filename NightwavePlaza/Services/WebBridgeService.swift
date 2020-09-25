@@ -29,6 +29,8 @@ class WebBridgeService: NSObject, WebBusDelegate {
     private let tooltipTarget = UIView()
     private var currentTooltip: EasyTipView?
     
+    private var startMenuHandler = StartMenuHandler()
+    
     func setup(
         webView: WKWebView,
         statusService: StatusService,
@@ -47,8 +49,9 @@ class WebBridgeService: NSObject, WebBusDelegate {
         
         self.viewController = viewController
         
-        
-        
+        startMenuHandler.setup(inViewController: viewController, onSelect: { action in
+            self.webBus.sendMessage(name: "openWindow", data: [ "window": action ])
+        })
         
         self.bindEvents()
     }
@@ -108,14 +111,7 @@ class WebBridgeService: NSObject, WebBusDelegate {
             self.playback.pause()
             completion(nil, nil)
         } else if message.name == "openDrawer" {
-            if let controller = self.viewController {
-                StartMenuHandler.showMenu(
-                    inViewController: controller,
-                    onSelect: { action in
-                        self.webBus.sendMessage(name: "openWindow", data: [ "window": action ])
-                    
-                })
-            }
+            self.startMenuHandler.show()
             completion(nil, nil)
         } else if message.name == "getAuthToken" {
             if let token = AuthStorage.getKey() {
