@@ -12,7 +12,7 @@ import GestureRecognizerClosures
 
 class StartMenuView: UIView {
     
-    let itemHeight: CGFloat = 55.0
+    let itemHeight: CGFloat = 50.0
     let itemSeparator: CGFloat = 1
     let fontSize: CGFloat = 14
     let iconSize: CGFloat = 32.0
@@ -22,7 +22,7 @@ class StartMenuView: UIView {
     
     let headerWidth: CGFloat = 25
     let headerFontSize: CGFloat = 19
-    let headerLeftPadding: CGFloat = 15
+    let headerLeftPadding: CGFloat = 5
     
     var onClick: ((_ item: StartMenuItem) -> Void)?
     
