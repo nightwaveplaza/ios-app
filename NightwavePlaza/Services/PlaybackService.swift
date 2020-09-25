@@ -47,6 +47,8 @@ class PlaybackService {
         self.replacePlayerForQuality()
         // Doesnt seems to work:
 //        self.resumePlaybackWhenBecomeReachable()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption), name: AVAudioSession.interruptionNotification, object: nil)
     }
     
     let reachability = try! Reachability()
@@ -113,6 +115,11 @@ class PlaybackService {
         self.player.rate = rate
         
         
+    }
+    
+    @objc private func handleInterruption() {
+        print("Playback interrupted")
+        self.pause()
     }
     
     private func setupPlaybackSession() {
