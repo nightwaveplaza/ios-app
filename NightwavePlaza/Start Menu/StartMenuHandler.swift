@@ -146,18 +146,25 @@ class StartMenuHandler {
         self.view.superview!.layoutIfNeeded()
     }
     
-    private var animator = UIViewPropertyAnimator()
+    private var animator: UIViewPropertyAnimator!
 
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
+            var shouldCancel = false
             if !isMenuOpened && recognizer.location(in: recognizer.view).x > 50 {
+                shouldCancel = true
+            }
+            if self.animator != nil {
+                shouldCancel = true
+            }
+            if shouldCancel {
                 recognizer.isEnabled = false
                 recognizer.isEnabled = true
                 break
             }
             self.updateForCurrentState()
-            animator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
+            animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeOut, animations: {
                 self.toggleMenu()
             })
             animator.startAnimation()
@@ -171,13 +178,14 @@ class StartMenuHandler {
             animator.fractionComplete = fraction
             break
         case .ended:
-            animator.isReversed = animator.fractionComplete < 0.5
+            animator.isReversed = animator.fractionComplete < 0.3
             animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-            animator.addCompletion { (position) in
+            animator.addCompletion { [unowned self] (position) in
                 if self.animator.isReversed == false {
                     self.isMenuOpened = !self.isMenuOpened
                 }
                 self.updateForCurrentState()
+                self.animator = nil
             }
             break
         @unknown default:
