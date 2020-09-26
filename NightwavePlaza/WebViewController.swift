@@ -81,7 +81,15 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         webView.backgroundColor = .clear
         webView.scrollView.isScrollEnabled = false
         
-        let webPath = (Bundle.main.bundlePath as NSString).appendingPathComponent("web");
+        var resourcesPath: NSString
+        
+        #if targetEnvironment(macCatalyst)
+        resourcesPath = Bundle.main.resourcePath! as NSString
+        #else
+        resourcesPath = Bundle.main.bundlePath as NSString
+        #endif
+
+        let webPath = resourcesPath.appendingPathComponent("web");
         let indexPath = (webPath as NSString).appendingPathComponent("index.html");
         
         let indexContent = try! NSString(contentsOfFile: indexPath, encoding: String.Encoding.utf8.rawValue);

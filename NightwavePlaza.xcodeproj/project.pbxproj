@@ -83,6 +83,7 @@
 		FA22BD672518089000D204D5 /* RequestToScrobble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToScrobble.swift; sourceTree = "<group>"; };
 		FA22BD692518089C00D204D5 /* RequestToNowPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToNowPlaying.swift; sourceTree = "<group>"; };
 		FA2D1DAB24E8873F00EE0556 /* WebBridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBridgeService.swift; sourceTree = "<group>"; };
+		FA6E52F4251FCADA00622119 /* Nightwave Plaza.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nightwave Plaza.entitlements"; sourceTree = "<group>"; };
 		FA7069BA247A69D700AFBD61 /* gena.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = gena.plist; sourceTree = SOURCE_ROOT; };
 		FA7069BC247A6A0C00AFBD61 /* RequestToGetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToGetStatus.swift; sourceTree = "<group>"; };
 		FA7069BE247A6ABB00AFBD61 /* NightwavePlaza-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NightwavePlaza-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -217,6 +218,7 @@
 		FA0FFD562479B55F00C58CFE /* NightwavePlaza */ = {
 			isa = PBXGroup;
 			children = (
+				FA6E52F4251FCADA00622119 /* Nightwave Plaza.entitlements */,
 				FA75265C25056D4800C649BC /* Tooltip */,
 				FAB2E1792504FDAF0026C008 /* Utils */,
 				FAB2E1722504F74F0026C008 /* Start Menu */,
@@ -717,6 +719,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "NightwavePlaza/Nightwave Plaza.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = PA5C4S9S27;
@@ -728,6 +731,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nightwaveplaza.NightwavePlaza;
 				PRODUCT_NAME = "Nightwave Plaza";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NightwavePlaza/Network/NightwavePlaza-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -741,6 +745,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "NightwavePlaza/Nightwave Plaza.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = PA5C4S9S27;
@@ -752,6 +757,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nightwaveplaza.NightwavePlaza;
 				PRODUCT_NAME = "Nightwave Plaza";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NightwavePlaza/Network/NightwavePlaza-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
