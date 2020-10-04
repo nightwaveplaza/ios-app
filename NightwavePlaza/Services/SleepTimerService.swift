@@ -7,7 +7,8 @@
 //
 
 import Foundation
-
+import RxSwift
+import RxCocoa
 
 class SleepTimerService {
     
@@ -17,8 +18,17 @@ class SleepTimerService {
     
     var onSleep: (() -> Void)?
     
+    let disposeBag = DisposeBag()
+    
     init(playback: PlaybackService) {
         self.playback = playback
+        
+        self.playback.playbackRate$.subscribe(onNext: { [unowned self] rate in
+            if rate == 0 {
+                self.cleanupTimer()
+            }
+        }, onError: nil, onCompleted: nil, onDisposed: nil)
+        .disposed(by: self.disposeBag)
     }
     
     
@@ -26,10 +36,10 @@ class SleepTimerService {
         let seconds = minutes * 60
 
         if minutes == 0 {
-            self.timer?.invalidate()
-            self.timer = nil
+            self.cleanupTimer()
         } else {
             self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(seconds), repeats: false) { (timer) in
+                self.cleanupTimer()
                 self.playback.player.pause()
                 self.onSleep?()
             }
@@ -43,6 +53,11 @@ class SleepTimerService {
         } else {
             return 0
         }
+    }
+    
+    private func cleanupTimer() {
+        self.timer?.invalidate()
+        self.timer = nil
     }
     
 }
