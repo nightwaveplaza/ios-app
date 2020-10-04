@@ -12,6 +12,7 @@ import MediaPlayer
 import RxSwift
 import RxCocoa
 import Reachability
+import BugfenderSDK
 
 enum PlaybackQuality: Int {
     case High = 0
@@ -48,13 +49,13 @@ class PlaybackService {
         // Doesnt seems to work:
 //        self.resumePlaybackWhenBecomeReachable()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption), name: AVAudioSession.interruptionNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption(notification:)), name: AVAudioSession.interruptionNotification, object: nil)
     }
     
     let reachability = try! Reachability()
 
     var playerRateWhenUnreachable: Float = 0
-
+    
     
     func resumePlaybackWhenBecomeReachable() {
         
@@ -71,17 +72,6 @@ class PlaybackService {
             print("Unable to start notifier")
         }
         
-    }
-    
-    // Not used anymore.. Remove?
-    func toggle() {
-        
-        if (player.rate == 1) {
-            player.pause()
-        } else {
-            player.play()
-        }
-        self.playbackRate$.onNext(player.rate)
     }
     
     func play() {
@@ -111,15 +101,43 @@ class PlaybackService {
         self.player.pause()
         
         self.player = AVPlayer(url: url)
-        
         self.player.rate = rate
-        
-        
     }
     
-    @objc private func handleInterruption() {
-        print("Playback interrupted")
-        self.pause()
+    func replacePlayerItem() {
+        self.player.replaceCurrentItem(with: AVPlayerItem(url: self.urlForQuality()))
+    }
+    
+    private func urlForQuality() -> URL {
+        self.quality == .High ? URL(string: "https://radio.plaza.one/mp3")! : URL(string: "https://radio.plaza.one/mp3_96")!
+    }
+    
+    @objc private func handleInterruption(notification: NSNotification) {
+        
+        guard let userInfo = notification.userInfo,
+            let interruptionTypeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeRawValue) else {
+                print("Unable to parse interruptionType")
+                self.pause()
+                return
+        }
+                
+        switch interruptionType {
+        case .began:
+            self.pause()
+        case .ended:
+            guard let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+            let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+            if options.contains(.shouldResume) {
+                self.play()
+            } else {
+                print("Should NOT resume a playback")
+                // Interruption ended. Playback should not resume.
+            }
+        @unknown default:
+            Bugfender.warning("New interruption type is unhandled: \(interruptionType)")
+        }
+        
     }
     
     private func setupPlaybackSession() {

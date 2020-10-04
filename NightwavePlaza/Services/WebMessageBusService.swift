@@ -73,9 +73,9 @@ class WebMessageBus: NSObject, WKScriptMessageHandler {
         let dataString = self.jsObjectStringFromObject(object: data)
         
         let jsMessage = "window['plaza'].push('\(name)', \(dataString)); 'ok'; "
-        print("Sending a message. Name=\(name). Data=\(dataString)")
+//        print("Sending a message. Name=\(name). Data=\(dataString)")
         webView?.evaluateJavaScript(jsMessage, completionHandler: { (res, err) in
-            print("Send Message Result: \(String(describing: res)), error = \(String(describing: err))")
+//            print("Send Message Result: \(String(describing: res)), error = \(String(describing: err))")
         })
     }
     

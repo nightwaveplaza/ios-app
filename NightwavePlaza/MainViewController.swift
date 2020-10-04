@@ -54,7 +54,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func onTriggerPlayButton(_ sender: Any) {
-        self.playback.toggle()
+//        self.playback.toggle()
         self.controlButton.setTitle(self.playback.paused ? "Play" : "Pause", for: .normal)
     }
     

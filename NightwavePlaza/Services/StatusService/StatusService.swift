@@ -32,7 +32,6 @@ class StatusService: NSObject {
         let bag = DisposeBag();
         
         updateScheduler.tick.flatMapLatest { (i) -> Observable<Status> in
-            Bugfender.print("Trying to get status")
             return self.getStatus()
         }
         // In case of error - retry in 3 seconds
@@ -63,8 +62,6 @@ class StatusService: NSObject {
         return Observable.create({ (observer) -> Cancelable in
             let handler = RestClient.shared.restClient.send(RequestToGetStatus()) { (res: Any?, err: Error?) in
                 if let status = res as? Status {
-                    Bugfender.print("New Status Received: \(status)")
-                    print("New Status Received: \(status)")
                     observer.onNext(status)
                 }
                 else if let error = err {
