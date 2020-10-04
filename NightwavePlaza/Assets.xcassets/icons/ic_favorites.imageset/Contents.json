@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "si_favorites.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_favorites.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

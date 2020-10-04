@@ -77,12 +77,13 @@ class StartMenuHandler {
     
     func menuItems() -> [StartMenuItem] {
         return [
-            StartMenuItem(icon: UIImage(named: "ic_ratings"), title: "Ratings", targetAction: "ratings", hasBottomLine: true),
+            StartMenuItem(icon: UIImage(named: "ic_ratings"), title: "Ratings", targetAction: "ratings", hasBottomLine: false),
+            StartMenuItem(icon: UIImage(named: "ic_history"), title: "Play History", targetAction: "history", hasBottomLine: true),
             StartMenuItem(icon: UIImage(named: "ic_favorites"), title: "My Favorites", targetAction: "user-favorites", hasBottomLine: false),
             StartMenuItem(icon: UIImage(named: "ic_profile"), title: "My Profile", targetAction: "user", hasBottomLine: true),
             StartMenuItem(icon: UIImage(named: "ic_settings"), title: "Settings", targetAction: "settings", hasBottomLine: false),
             StartMenuItem(icon: UIImage(named: "ic_help"), title: "About", targetAction: "about", hasBottomLine: false),
-            StartMenuItem(icon: UIImage(named: "ic_launcher"), title: "Support", targetAction: "support", hasBottomLine: true)
+            StartMenuItem(icon: UIImage(named: "ic_launcher"), title: "Donate", targetAction: "support", hasBottomLine: true)
         ]
     }
     
