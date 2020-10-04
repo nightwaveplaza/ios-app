@@ -42,6 +42,8 @@ class PlaybackService {
     var player = AVPlayer(url: URL(string: "https://radio.plaza.one/mp3")!)
     
     let reachability = try! Reachability()
+    
+    private var lastPlayTime: CMTime?
 
     init() {
         self.setupPlaybackSession()
@@ -69,13 +71,20 @@ class PlaybackService {
     }
     
     func play() {
+        if let lastTime = self.lastPlayTime, CMTimeCompare(player.currentTime(), lastTime) == 0 {
+            // If player stalled, reload player
+            self.replacePlayerForQuality()
+        }
+        
         player.play()
         self.playbackRate$.onNext(player.rate)
+        self.lastPlayTime = player.currentTime()
     }
     
     func pause() {
         player.pause()
         self.playbackRate$.onNext(player.rate)
+        self.lastPlayTime = player.currentTime()
     }
     
     var paused: Bool {
