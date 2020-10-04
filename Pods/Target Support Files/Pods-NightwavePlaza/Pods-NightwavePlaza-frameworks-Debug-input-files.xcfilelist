@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-NightwavePlaza/Pods-NightwavePlaza-frameworks.sh
+${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt
 ${BUILT_PRODUCTS_DIR}/ComponentsHub/ComponentsHub.framework
 ${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework
 ${BUILT_PRODUCTS_DIR}/FastCoding/FastCoding.framework

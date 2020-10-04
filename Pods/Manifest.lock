@@ -1,4 +1,5 @@
 PODS:
+  - BugfenderSDK (1.9.2)
   - ComponentsHub/Macroses (0.0.7):
     - libextobjc/EXTScope
   - ComponentsHub/SingletonStorage (0.0.7):
@@ -33,6 +34,7 @@ PODS:
   - TyphoonRestClient (1.8.0)
 
 DEPENDENCIES:
+  - BugfenderSDK (~> 1.9)
   - "ComponentsHub/SingletonStorage (from `git@github.com:alexgarbarev/ios-hub.git`)"
   - GestureRecognizerClosures (~> 5)
   - NSString-Hash
@@ -47,6 +49,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - BugfenderSDK
     - Differentiator
     - FastCoding
     - GestureRecognizerClosures
@@ -77,6 +80,7 @@ CHECKOUT OPTIONS:
     :git: "git@github.com:alexgarbarev/TRCAPIClient.git"
 
 SPEC CHECKSUMS:
+  BugfenderSDK: 31042f345e838dbe2b7e98ee543efaafc1c7ad58
   ComponentsHub: a895e3bf505ccc32620b338647984a9270b161c3
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   FastCoding: 3b590f7143a229780fa744b35084d85d9461587e
@@ -94,6 +98,6 @@ SPEC CHECKSUMS:
   TRCAPIClient: e190f6c0966471b8ae31f8f77ed3c75cfc282a94
   TyphoonRestClient: 262167748e32dbe25c6669e48c1559379841bd9c
 
-PODFILE CHECKSUM: 18fbea0dfec03aecf5e913d109c5e3f7b4111722
+PODFILE CHECKSUM: b90769aacc76f0325a891bf96fab400b6cdb7464
 
 COCOAPODS: 1.9.2

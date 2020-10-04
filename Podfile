@@ -11,6 +11,7 @@ target 'NightwavePlaza' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   
+  pod 'BugfenderSDK', '~> 1.9'
   pod 'GestureRecognizerClosures', '~> 5'
   
   

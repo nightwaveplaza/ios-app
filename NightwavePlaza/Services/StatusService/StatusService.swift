@@ -9,14 +9,13 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import BugfenderSDK
 
 class StatusService: NSObject {
     
     var status$ = BehaviorSubject<Status?>(value: nil) //: Observable<Status>;
     
     private var updateBag: DisposeBag?
-    private var timer: Timer?
-    
     private let updateScheduler = UpdateScheduler()
     
     override init() {
@@ -33,8 +32,15 @@ class StatusService: NSObject {
         let bag = DisposeBag();
         
         updateScheduler.tick.flatMapLatest { (i) -> Observable<Status> in
+            Bugfender.print("Trying to get status")
             return self.getStatus()
         }
+        // In case of error - retry in 3 seconds
+        .retryWhen({ errors in
+            return errors.enumerated().flatMap { (index, error) -> Observable<Int64> in
+                return Observable<Int64>.timer(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
+            }
+        })
         .distinctUntilChanged()
         .map({ (status) -> Status in
             self.updateScheduler.schedule(status: status)
@@ -57,16 +63,20 @@ class StatusService: NSObject {
         return Observable.create({ (observer) -> Cancelable in
             let handler = RestClient.shared.restClient.send(RequestToGetStatus()) { (res: Any?, err: Error?) in
                 if let status = res as? Status {
+                    Bugfender.print("New Status Received: \(status)")
                     print("New Status Received: \(status)")
                     observer.onNext(status)
                 }
                 else if let error = err {
-                    print("StatusError: \(error)")
+                    Bugfender.error("Error while getting status: \(error)")
                     observer.onError(error)
                 }
                 observer.onCompleted()
             }
             return Disposables.create {
+                if handler?.state() == TRCProgressHandlerState.running {
+                    Bugfender.warning("Status receiving cancelled")
+                }
                 handler?.cancel()
             }
         });
