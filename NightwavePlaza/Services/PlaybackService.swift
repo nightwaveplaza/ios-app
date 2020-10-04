@@ -41,35 +41,29 @@ class PlaybackService {
     
     var player = AVPlayer(url: URL(string: "https://radio.plaza.one/mp3")!)
     
+    let reachability = try! Reachability()
+
     init() {
         self.setupPlaybackSession()
         self.setupRemoteTransportControls()
 
         self.replacePlayerForQuality()
-        // Doesnt seems to work:
-//        self.resumePlaybackWhenBecomeReachable()
+        self.resumePlaybackWhenBecomeReachable()
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption(notification:)), name: AVAudioSession.interruptionNotification, object: nil)
     }
     
-    let reachability = try! Reachability()
 
-    var playerRateWhenUnreachable: Float = 0
-    
-    
     func resumePlaybackWhenBecomeReachable() {
         
         reachability.whenReachable = { [unowned self] reachability in
-            self.player.rate = self.playerRateWhenUnreachable;
-        }
-        reachability.whenUnreachable = { [unowned self] reachability in
-            self.playerRateWhenUnreachable = self.player.rate;
+            self.replacePlayerForQuality()
         }
         
         do {
             try reachability.startNotifier()
         } catch {
-            print("Unable to start notifier")
+            Bugfender.error("Unable to start Reachability Notifier")
         }
         
     }
@@ -77,13 +71,11 @@ class PlaybackService {
     func play() {
         player.play()
         self.playbackRate$.onNext(player.rate)
-        playerRateWhenUnreachable = 1;
     }
     
     func pause() {
         player.pause()
         self.playbackRate$.onNext(player.rate)
-        playerRateWhenUnreachable = 0;
     }
     
     var paused: Bool {
@@ -93,19 +85,10 @@ class PlaybackService {
     }
     
     func replacePlayerForQuality() {
-        
-        let url = self.quality == .High ? URL(string: "https://radio.plaza.one/mp3")! : URL(string: "https://radio.plaza.one/mp3_96")!
-        
         let rate = self.player.rate;
-        
         self.player.pause()
-        
-        self.player = AVPlayer(url: url)
+        self.player = AVPlayer(url: self.urlForQuality())
         self.player.rate = rate
-    }
-    
-    func replacePlayerItem() {
-        self.player.replaceCurrentItem(with: AVPlayerItem(url: self.urlForQuality()))
     }
     
     private func urlForQuality() -> URL {
@@ -121,7 +104,7 @@ class PlaybackService {
                 self.pause()
                 return
         }
-                
+    
         switch interruptionType {
         case .began:
             self.pause()
