@@ -50,7 +50,11 @@ class WebBridgeService: NSObject, WebBusDelegate {
         self.viewController = viewController
         
         startMenuHandler.setup(inViewController: viewController, onSelect: { action in
-            self.webBus.sendMessage(name: "openWindow", data: [ "window": action ])
+            if action == "user-favorites" && AuthStorage.getKey() == nil {
+                self.webBus.sendMessage(name: "openWindow", data: [ "window": "user-login" ])
+            } else {
+                self.webBus.sendMessage(name: "openWindow", data: [ "window": action ])
+            }
         })
         
         self.bindEvents()
@@ -164,11 +168,11 @@ class WebBridgeService: NSObject, WebBusDelegate {
             completion(nil, nil)
             self.sendCurrentStatus()
         }
-        else if message.name == "getVote" {
+        else if message.name == "getReaction" {
             
-            completion(self.currentVote(), nil)
+            completion(self.currentReaction(), nil)
         }
-        else if message.name == "updateVote" {
+        else if message.name == "setReaction" {
             
             completion(nil, nil)
         }
@@ -213,33 +217,33 @@ class WebBridgeService: NSObject, WebBusDelegate {
     
     private func songObject(status: Status, isPlaying playing: Bool) -> NSDictionary {
         if let dict = status.raw as? NSDictionary {
-            let playback = (dict["playback"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
+            let song = (dict["song"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
             if let imageFileUrl = status.imageFileUrl {
-                playback["artworkFilename"] = imageFileUrl.absoluteString
+                song["artworkFilename"] = imageFileUrl.absoluteString
             }
-            playback["isPlaying"] = playing
-            playback["updated"] = status.receivedAt.timeIntervalSince1970 * 1000
+            song["isPlaying"] = playing
+            song["updated"] = status.receivedAt.timeIntervalSince1970 * 1000
             
             let time = self.sleepTimer.milisecondsSince1970ToSleep()
             if time < 1 {
-                playback["sleepTime"] = Int(0)
+                song["sleepTime"] = Int(0)
             } else {
-                playback["sleepTime"] = time
+                song["sleepTime"] = time
             }
             
+            song["likes"] = status.song.reactions.like
+            song["dislikes"] = status.song.reactions.dislike
             
-            return playback
+            return song
         } else {
             return NSDictionary()
         }
     }
     
-    private func currentVote() -> NSDictionary {
+    private func currentReaction() -> NSDictionary {
         let dict = NSMutableDictionary()
-        dict["artist"] = "";
-        dict["title"] = "";
-        dict["artwork"] = "";
-        dict["rate"] = 0;
+        dict["songId"] = "";
+        dict["score"] = 0;
         return dict;
     }
     

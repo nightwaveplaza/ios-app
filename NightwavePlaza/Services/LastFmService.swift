@@ -71,7 +71,7 @@ class LastFmService {
         self.playbackService?.playbackRate$.subscribe(onNext: { (value) in
             if let playback = self.playbackService, playback.paused == false {
                 if let currentStatus = try? self.statusService?.status$.value() {
-                  self.nowPlaying(playback: currentStatus.playback)
+                  self.nowPlaying(song: currentStatus.song)
                 }
             }
         }
@@ -80,11 +80,11 @@ class LastFmService {
         self.statusService?.status$.withPrevious()
             .subscribe(onNext: { (previous, current) in
                 
-                if let previous = previous, let previousPlayback = previous?.playback, let current = current {
-                    if previousPlayback.songId != current.playback.songId {
+                if let previous = previous, let previousSong = previous?.song, let current = current {
+                    if previousSong.id != current.song.id {
                         if let playback = self.playbackService, playback.paused == false {
-                            self.scrobble(playback: previousPlayback)
-                            self.nowPlaying(playback: current.playback)
+                            self.scrobble(song: previousSong)
+                            self.nowPlaying(song: current.song)
                         }
                     }
                 }
@@ -92,16 +92,16 @@ class LastFmService {
         ).disposed(by: disposeBag)
     }
     
-    func nowPlaying(playback: StatusPlayback) {
+    func nowPlaying(song: Song) {
         guard let token = LastFmService.getAccount()?.token else {
             return
         }
         
         let request = RequestToNowPlaying()
         request.token = token as String
-        request.album = playback.album
-        request.artist = playback.artist
-        request.title = playback.title
+        request.album = song.album
+        request.artist = song.artist
+        request.title = song.title
         
         RestClient.shared.restClient.send(request) {[unowned self] (result, error) in
             
@@ -114,19 +114,19 @@ class LastFmService {
         
     }
     
-    func scrobble(playback: StatusPlayback) {
+    func scrobble(song: Song) {
         guard let token = LastFmService.getAccount()?.token else {
             return
         }
         
         let request = RequestToScrobble()
         request.token = token as String
-        request.album = playback.album
-        request.artist = playback.artist
-        request.title = playback.title
+        request.album = song.album
+        request.artist = song.artist
+        request.title = song.title
         
         request.timestamp = NSNumber(value: NSDate().timeIntervalSince1970)
-        request.length = NSNumber(value: playback.length)
+        request.length = NSNumber(value: song.length)
         
         RestClient.shared.restClient.send(request) {[unowned self] (result, error) in
             

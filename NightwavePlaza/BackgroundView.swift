@@ -61,7 +61,7 @@ class BackgroundView: UIView {
     }
     
     func setSolid() {
-        self.backgroundColor = self.solidColor
+        self.backgroundColor = .clear
         player.rate = 0
         playerLayer.isHidden = true
         playerLayer.player = nil

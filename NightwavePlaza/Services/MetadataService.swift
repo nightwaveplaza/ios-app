@@ -19,9 +19,9 @@ class MetadataService {
     
     func setMetadata(status: Status) {
         var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [String : Any]()
-        nowPlayingInfo[MPMediaItemPropertyArtist] = status.playback.artist
-        nowPlayingInfo[MPMediaItemPropertyTitle] = status.playback.title
-        nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = status.playback.album
+        nowPlayingInfo[MPMediaItemPropertyArtist] = status.song.artist
+        nowPlayingInfo[MPMediaItemPropertyTitle] = status.song.title
+        nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = status.song.album
         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = self.playback.player.rate
         
         if let image = status.image {
@@ -31,7 +31,7 @@ class MetadataService {
             }
         }
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = status.getPosition()
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = status.playback.length
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = status.song.length
 
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }

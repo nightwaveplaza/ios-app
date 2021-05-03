@@ -12,16 +12,14 @@ import Foundation
 class Status: NSObject, Codable {
     
     enum CodingKeys: String, CodingKey {
-        case maintenance
         case listeners
         case updatedAt
-        case playback
+        case song
     }
     
-    var maintenance: Bool
-    var listeners: Int
-    var updatedAt: TimeInterval
-    var playback: StatusPlayback
+    var listeners: Int = 0
+    var updatedAt: TimeInterval = 0.0
+    var song: Song
     
     var receivedAt = Date()
     var image: UIImage?
@@ -38,35 +36,37 @@ class Status: NSObject, Codable {
     }
     
     func isEqual(toStatus: Status) -> Bool {
-        return toStatus.playback.songId == self.playback.songId
+        return toStatus.song.id == self.song.id
     }
     
     func estimatedFinish() -> Date {
-        let startTime = self.receivedAt.addingTimeInterval(-Double(self.playback.position))
-        return startTime.addingTimeInterval(Double(self.playback.length))
+        let startTime = self.receivedAt.addingTimeInterval(-Double(self.song.position))
+        return startTime.addingTimeInterval(Double(self.song.length))
     }
     
     /**
      * Returns position adjusted for current time
      */
     func getPosition() -> Double {
-        let startTime = self.receivedAt.addingTimeInterval(-Double(self.playback.position))
-        return min(-startTime.timeIntervalSinceNow, Double(self.playback.length))
+        let startTime = self.receivedAt.addingTimeInterval(-Double(self.song.position))
+        return min(-startTime.timeIntervalSinceNow, Double(self.song.length))
     }
     
 }
 
-class StatusPlayback: NSObject, Codable {
-    var songId: String
+class Song: NSObject, Codable {
+    var id: String
     var artist: String
     var title: String
     var album: String
     var position: Int
     var length: Int
-    var artwork: String
     var artworkSrc: String
-    var artworkSm: String
     var artworkSmSrc: String
-    var likes: Int
-    var dislikes: Int
+    var reactions: SongReactions
+}
+
+class SongReactions: NSObject, Codable {
+    var like: Int
+    var dislike: Int
 }

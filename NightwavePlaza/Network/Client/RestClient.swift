@@ -16,7 +16,7 @@ class RestClient: CCAPIClient {
     override init() {
         super.init()
         self.enableLogging = false;
-        self.baseUrl = URL(string: "https://api.plaza.one/")!
+        self.baseUrl = URL(string: "https://api-beta2.plaza.one/")!
     }
     
 }

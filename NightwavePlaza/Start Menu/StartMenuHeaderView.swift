@@ -49,7 +49,7 @@ class StartMenuHeaderView: UIView {
         setupGradient()
         
         self.label = UILabel()
-        self.label.text = "Nighwave Plaza Second Edition"
+        self.label.text = "Nightwave Plaza Second Edition"
         self.label.textColor = UIColor.white
         self.label.font = UIFont.boldSystemFont(ofSize: 19)
         self.addSubview(self.label)

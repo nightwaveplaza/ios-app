@@ -100,8 +100,8 @@ class MainViewController: UIViewController {
     func bindStatusToUI() {
         statusService.status$.distinctUntilChanged().subscribe { [weak self] (event) in
             if let status = event.element as? Status {
-                self?.artistLabel.text = status.playback.artist
-                self?.songLabel.text = status.playback.title
+                self?.artistLabel.text = status.song.artist
+                self?.songLabel.text = status.song.title
                 self?.artImageView.image = status.image;
                 self?.metadata.setMetadata(status: status)
                 self?.updateDurationLabel(status: status)
@@ -117,7 +117,7 @@ class MainViewController: UIViewController {
         formatter.zeroFormattingBehavior = [ .pad ]
         
         let currTimeString = formatter.string(from: status.getPosition())!
-        let lengthTimeString = formatter.string(from: Double(status.playback.length))!
+        let lengthTimeString = formatter.string(from: Double(status.song.length))!
         self.durationLabel.text = "\(currTimeString) / \(lengthTimeString)"
     }
     

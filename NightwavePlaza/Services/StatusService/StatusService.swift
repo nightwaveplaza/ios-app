@@ -81,7 +81,7 @@ class StatusService: NSObject {
     
     private func loadAlbumImage(status: Status) -> Observable<Status> {
         return Observable.create({ (observer) in
-            let handler = RestClient.shared.restClient.send(RequestToGetImage(url: status.playback.artwork)) { (image, error) in
+            let handler = RestClient.shared.restClient.send(RequestToGetImage(url: status.song.artworkSrc)) { (image, error) in
                 if let image = image as? UIImage {
                     status.image = image
                     status.imageFileUrl = self.storeImage(image: image)
