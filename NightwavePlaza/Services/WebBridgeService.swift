@@ -50,7 +50,7 @@ class WebBridgeService: NSObject, WebBusDelegate {
         self.viewController = viewController
         
         startMenuHandler.setup(inViewController: viewController, onSelect: { action in
-            if action == "user-favorites" && AuthStorage.getKey() == nil {
+            if (action == "user-favorites" || action == "user") && AuthStorage.getKey() == "" {
                 self.webBus.sendMessage(name: "openWindow", data: [ "window": "user-login" ])
             } else {
                 self.webBus.sendMessage(name: "openWindow", data: [ "window": action ])
@@ -231,8 +231,8 @@ class WebBridgeService: NSObject, WebBusDelegate {
                 song["sleepTime"] = time
             }
             
-            song["likes"] = status.song.reactions.like
-            song["dislikes"] = status.song.reactions.dislike
+            song["likes"] = status.song.reactions
+            song["listeners"] = status.listeners
             
             return song
         } else {

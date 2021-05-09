@@ -17,7 +17,7 @@ class MetadataService {
         self.playback = playback
     }
     
-    func setMetadata(status: Status) {
+    func setMetadata(status: Status) {        
         var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [String : Any]()
         nowPlayingInfo[MPMediaItemPropertyArtist] = status.song.artist
         nowPlayingInfo[MPMediaItemPropertyTitle] = status.song.title

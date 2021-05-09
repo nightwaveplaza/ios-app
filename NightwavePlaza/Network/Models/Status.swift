@@ -63,10 +63,5 @@ class Song: NSObject, Codable {
     var length: Int
     var artworkSrc: String
     var artworkSmSrc: String
-    var reactions: SongReactions
-}
-
-class SongReactions: NSObject, Codable {
-    var like: Int
-    var dislike: Int
+    var reactions: Int
 }
