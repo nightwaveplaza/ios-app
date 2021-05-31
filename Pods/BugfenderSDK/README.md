@@ -3,7 +3,7 @@ Bugfender SDK for iOS [![Build Status](https://travis-ci.org/bugfender/Bugfender
 
 Bugfender is a cloud service to collect mobile application logs. Developers can control log sending programmatically and manually for each device. Logs are available at the [Bugfender console](https://app.bugfender.com/). You'll need an account.
 
-BugfenderSDK 1.9 works for iOS 10.0 and newer. For iOS 8 support you can still use the BugfenderSDK 1.8.
+BugfenderSDK 1.10 works for iOS 10.0 and newer. For iOS 8 support you can still use the BugfenderSDK 1.8.
 
 **Updating from BugfenderSDK prior to 1.8 and ObjC only projects:**
 
@@ -18,26 +18,43 @@ First of all you will need to add the framework to your project.
 1. Create a Podfile if you don't have one: `pod init`
 1. Add Bugfender to your Podfile:
    ```
-   pod 'BugfenderSDK', '~> 1.9'
+   pod 'BugfenderSDK', '~> 1.10'
    ```
 1. Save the file and run: `pod install`. This creates an `.xcworkspace` file for your app. Use this file for all future development on your application.
 
+## Using Swift Package Manager
+
+1. In Xcode go to the target's `General` tab and press on the icon to add a new library <img src="https://github.com/bugfender/BugfenderSDK-iOS/blob/master/readme-images/spm/spm1.png?raw=true" width="400" >
+
+2. In the popover choose `Add Other` and then `Add Package Dependency...`
+<img src="https://github.com/bugfender/BugfenderSDK-iOS/blob/master/readme-images/spm/spm2.png?raw=true" width="300" >
+
+3. Paste the GitHub url from the Bugfender iOS repository `https://github.com/bugfender/BugfenderSDK-iOS` in the textfield and press `Next`
+<img src="https://github.com/bugfender/BugfenderSDK-iOS/blob/master/readme-images/spm/spm3.png?raw=true" width="400" >
+
+4. Leave the first option checked and press `Next`
+<img src="https://github.com/bugfender/BugfenderSDK-iOS/blob/master/readme-images/spm/spm4.png?raw=true" width="400" >
+
+5. Xcode will download the Bugfender files and you will be prompted with the following menu. Ensure BugfenderSDK is selected and press Finish
+<img src="https://github.com/bugfender/BugfenderSDK-iOS/blob/master/readme-images/spm/spm5.png?raw=true" width="400" >
+
+6. Import `SystemConfiguration.framework`, `Security.framework`, `CoreServices.framework`, `CoreGraphics.framework` and `libc++.tbd` as well.
+
+*There is a [known issue](https://bugs.swift.org/browse/SR-13343) in Xcode12 failing to launch apps in a physical device when debugging. At the moment of writing this docs, the issue is still not fixed in Xcode12.3 Beta. The issue should not affect release or simulator versions. But, if you get a `No code signature found` or `A valid provisioning profile for this executable was not found` we recommend to use the [workaround proposed by the PSPDFKit](https://pspdfkit.com/guides/ios/current/knowledge-base/library-not-found-swiftpm/) team.*
+
 ## Using Carthage
-*Carthage doesn't support Mac Catalyst at the moment. Should you need it, use the manual installation or CocoaPods*
 1. Add to your Cartfile:
    ```
-   github "bugfender/BugfenderSDK-iOS" ~>1.9
+   github "bugfender/BugfenderSDK-iOS" ~>1.10
    ```
 1. Save the file and run `carthage update`
 1. Import `Carthage/Build/iOS/BugfenderSDK.framework` to your `Linked Frameworks and Libraries` (or drag-n-drop the file to your project).
 1. Make sure to select the option "Embed framework" (or list the framework in `input.xcfilelist`).
-1. Import `SystemConfiguration.framework`, `Security.framework`, `MobileCoreServices.framework`, `CoreGraphics.framework` and `libc++.tbd` as well.
+1. Import `SystemConfiguration.framework`, `Security.framework`, `CoreServices.framework`, `CoreGraphics.framework` and `libc++.tbd` as well.
 
-*Notice:* Carthage will complain if you use Bugfender SDK 1.9 (which is Swift 5.2) in a different Swift version. As of Swift 5 this shouldn't be an issue because [Swift has ABI stability](https://swift.org/blog/abi-stability-and-more/).
+*Please note:* make sure to use Carthage v0.35.0 or newer, there is a bug in prior versions that will sometimes complain about "Incompatible Swift version".
 
-This is a [known bug in Carthage](https://github.com/Carthage/Carthage/issues/2887). In the meantime, you can work this around by using the Bugfender SDK version that matches the Swift version in your project (Bugfender SDK 1.8 matches Swift 5.1). Prior to Bugfender 1.8 the SDK was pure ObjC, but you had to add a Swift helper manually.
-
-Alternatively, you can just use the CocoaPods (recommended) or manual installation steps.
+*Mac Catalyst:* Carthage doesn't support Mac Catalyst at the moment. Should you need it, use the manual installation or CocoaPods.
 
 ## Manual
 
@@ -45,17 +62,41 @@ If you prefer to install the SDK manually you can use the provided xcframework i
 
 1. Go to your **Project** > **Your Target** > **General** > **Frameworks, Libraries, and Embedded Content** and drag `BugfenderSDK.xcframework` there.
 1. Make sure to select the option "Embed framework"
-1. Make sure you have `SystemConfiguration.framework`, `Security.framework`, `MobileCoreServices.framework`, `CoreGraphics.framework` and `libc++.tbd` there as well.
+1. Make sure you have `SystemConfiguration.framework`, `Security.framework`, `CoreServices.framework`, `CoreGraphics.framework` and `libc++.tbd` there as well.
 
 # Using Bugfender
 Once you have the framework in your project, using it is as easy as using `BFLog()` instead of `NSLog()` or `bfprint()` instead `print()`.
 
 ## Swift
 
+If your application uses SwiftUI and doesn't have an AppDelegate, you might need to create one like this:
+
+```Swift
+@main
+struct YourAppNameApp: App {
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // your Bugfender init code here
+
+        return true
+    }
+}
+```
+
 In your AppDelegate class:
 
 ```Swift
-import BugfenderSDK
+@_exported import BugfenderSDK
 ```
 
 And add the following to `application(_:didFinishLaunchingWithOptions:)`:

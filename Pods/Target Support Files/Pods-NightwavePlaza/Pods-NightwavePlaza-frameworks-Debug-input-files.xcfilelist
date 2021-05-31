@@ -1,5 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-NightwavePlaza/Pods-NightwavePlaza-frameworks.sh
-${BUILT_PRODUCTS_DIR}/cocoapods-artifacts-${CONFIGURATION}.txt
 ${BUILT_PRODUCTS_DIR}/ComponentsHub/ComponentsHub.framework
 ${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework
 ${BUILT_PRODUCTS_DIR}/FastCoding/FastCoding.framework
@@ -16,3 +15,4 @@ ${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework
 ${BUILT_PRODUCTS_DIR}/TRCAPIClient/TRCAPIClient.framework
 ${BUILT_PRODUCTS_DIR}/TyphoonRestClient/TyphoonRestClient.framework
 ${BUILT_PRODUCTS_DIR}/libextobjc/libextobjc.framework
+${PODS_XCFRAMEWORKS_BUILD_DIR}/BugfenderSDK/BugfenderSDK.framework/BugfenderSDK

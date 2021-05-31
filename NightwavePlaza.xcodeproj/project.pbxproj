@@ -514,7 +514,6 @@
 			buildConfigurationList = FA0FFD732479B56100C58CFE /* Build configuration list for PBXNativeTarget "NightwavePlaza" */;
 			buildPhases = (
 				3E1C49673F120BA35AA2341E /* [CP] Check Pods Manifest.lock */,
-				B12CA7CBE64E2A52A366845D /* [CP] Prepare Artifacts */,
 				FA0FFD502479B55F00C58CFE /* Sources */,
 				FA0FFD512479B55F00C58CFE /* Frameworks */,
 				FA0FFD522479B55F00C58CFE /* Resources */,
@@ -787,23 +786,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NightwavePlaza/Pods-NightwavePlaza-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B12CA7CBE64E2A52A366845D /* [CP] Prepare Artifacts */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NightwavePlaza/Pods-NightwavePlaza-artifacts-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Prepare Artifacts";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NightwavePlaza/Pods-NightwavePlaza-artifacts-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NightwavePlaza/Pods-NightwavePlaza-artifacts.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C27BDAEAD401A3974FD21C5E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1027,7 +1009,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "NightwavePlaza/Nightwave Plaza.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = PA5C4S9S27;
 				INFOPLIST_FILE = NightwavePlaza/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
@@ -1035,6 +1017,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nightwaveplaza.NightwavePlaza;
 				PRODUCT_NAME = "Nightwave Plaza";
 				SUPPORTS_MACCATALYST = YES;
@@ -1053,7 +1036,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "NightwavePlaza/Nightwave Plaza.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = PA5C4S9S27;
 				INFOPLIST_FILE = NightwavePlaza/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
@@ -1061,6 +1044,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nightwaveplaza.NightwavePlaza;
 				PRODUCT_NAME = "Nightwave Plaza";
 				SUPPORTS_MACCATALYST = YES;
