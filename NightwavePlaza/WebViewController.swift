@@ -106,7 +106,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             do {
                 let status = try self?.statusService.status$.value()
                 if let status = status {
-                    self?.metadata.setMetadata(status: status)
+                    self?.metadata.setMetadata(status: status, isPlaying: self?.playback.paused == false)
                 }
             } catch { }
         })

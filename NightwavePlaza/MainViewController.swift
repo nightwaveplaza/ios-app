@@ -87,7 +87,7 @@ class MainViewController: UIViewController {
             do {
                 let status = try self?.statusService.status$.value()
                 if let status = status {
-                    self?.metadata.setMetadata(status: status)
+                    self?.metadata.setMetadata(status: status, isPlaying: self?.playback.paused == false)
                     self?.updateDurationLabel(status: status)
                 }
             } catch { }
@@ -103,7 +103,7 @@ class MainViewController: UIViewController {
                 self?.artistLabel.text = status.song.artist
                 self?.songLabel.text = status.song.title
                 self?.artImageView.image = status.image;
-                self?.metadata.setMetadata(status: status)
+                self?.metadata.setMetadata(status: status, isPlaying: self?.playback.paused == false)
                 self?.updateDurationLabel(status: status)
             }
             

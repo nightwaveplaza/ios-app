@@ -35,7 +35,7 @@ class StatusService: NSObject {
             return self.getStatus()
         }
         // In case of error - retry in 3 seconds
-        .retryWhen({ errors in
+        .retry(when: { errors in
             return errors.enumerated().flatMap { (index, error) -> Observable<Int64> in
                 return Observable<Int64>.timer(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
             }
@@ -68,6 +68,7 @@ class StatusService: NSObject {
                     Bugfender.error("Error while getting status: \(error)")
                     observer.onError(error)
                 }
+                print("Received new status from backend!")
                 observer.onCompleted()
             }
             return Disposables.create {

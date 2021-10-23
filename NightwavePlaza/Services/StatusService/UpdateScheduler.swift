@@ -17,15 +17,6 @@ class UpdateScheduler: NSObject {
     
     private var currentTimers: [Timer] = []
     
-    var repeatTimer: Timer!
-
-    override init() {
-        super.init()
-        self.repeatTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [unowned self] (timer) in
-            self.fireTimer(timer: timer, context: [ "type": "repeat" ])
-        }
-    }
-    
     func schedule(status: Status) {
         
         for timer in currentTimers {
@@ -57,12 +48,5 @@ class UpdateScheduler: NSObject {
         self.tick.onNext(())
     }
     
-    func fireEndTrack(timer: Timer, context: [String: String]?) {
-        
-    }
-    
-    deinit {
-        self.repeatTimer.invalidate()
-    }
     
 }

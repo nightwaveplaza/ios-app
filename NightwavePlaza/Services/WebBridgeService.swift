@@ -70,9 +70,10 @@ class WebBridgeService: NSObject, WebBusDelegate {
         
         statusService.status$.subscribe { [unowned self] (event) in
             if let status = event.element as? Status {
-                self.metadata.setMetadata(status: status)
-                
-                let song = self.songObject(status: status, isPlaying: self.playback.paused == false)
+                let isPlaying = self.playback.paused == false
+                self.metadata.setMetadata(status: status, isPlaying: isPlaying)
+              
+                let song = self.songObject(status: status, isPlaying: isPlaying)
                 self.webBus.sendMessage(name: "status", data: song)
             }
         }.disposed(by: disposeBag)
