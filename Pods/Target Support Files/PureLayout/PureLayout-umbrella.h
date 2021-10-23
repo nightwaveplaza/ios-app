@@ -10,10 +10,10 @@
 #endif
 #endif
 
+#import "PureLayout+Internal.h"
 #import "ALView+PureLayout.h"
 #import "NSArray+PureLayout.h"
 #import "NSLayoutConstraint+PureLayout.h"
-#import "PureLayout+Internal.h"
 #import "PureLayout.h"
 #import "PureLayoutDefines.h"
 
