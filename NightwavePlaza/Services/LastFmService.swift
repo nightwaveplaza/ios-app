@@ -34,6 +34,10 @@ class LastFmService {
     static let storage = CCKeychainStorage(with: LastFmAccount.classForCoder(), accountName: "lastFmAccount", serviceName: "NightwavePlaza.account")
     
     static func getAccount() -> LastFmAccount? {
+        // Hardcoded to disable LastFm feature at all
+        // TODO: Remove it completely from the app!
+        return nil
+        
         if let account = self.storage?.getObject() {
             if let lastFmAccount = account as? LastFmAccount, let token = lastFmAccount.token, token.length > 0 {
                 return lastFmAccount

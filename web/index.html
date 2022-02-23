@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+       :root {
+          --bottom-safe-inset: 0px;
+       }
+    </style>
     <meta charset="utf-8">
     <title>Nightwave Plaza</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="css/dist.css?v=aa15jutv">
-    <link rel="stylesheet" type="text/css" href="css/plaza98.css?v=aa15jutv">
-    <link rel="stylesheet" type="text/css" href="css/app.css?v=aa15jutv">
+    <link rel="stylesheet" type="text/css" href="css/dist.css?v=220221234439">
+    <link rel="stylesheet" type="text/css" href="css/app.css?v=220221234439">
 </head>
 <body>
     <div id="app">
         <app></app>
+        <!-- Filling safe area with dummy div -->
+        <div id="bottom-safe-area">
+            <div style="height: var(--bottom-safe-inset); background-color: #C0C0C0">
+            </div>
+        </div>
     </div>
-    <script src="js/plaza.js?v=aa15jutv"></script>
-    <script src="js/manifest.js?v=aa15jutv"></script>
-    <script src="js/vendor.js?v=aa15jutv"></script>
-    <script src="js/app.js?v=aa15jutv"></script>
+    <script>
+      window['plaza'] = {
+        vue: {},
+
+        push: function(action, data) {
+          if (action === 'openWindow') {
+            this.vue.openWindow(data.window);
+          }
+
+          if (action === 'closeWindow') {
+            this.vue.closeWindow(data.window);
+          }
+
+          this.vue.pushData(action, data);
+        }
+      };
+    </script>
+    <script src="js/manifest.js?v=220221234439"></script>
+    <script src="js/vendor.js?v=220221234439"></script>
+    <script src="js/app.js?v=220221234439"></script>
 </body>
 </html>

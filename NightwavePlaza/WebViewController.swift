@@ -30,7 +30,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     private let webBridge = WebBridgeService()
     
     private var selectionWasDisabled = false
-    
+      
     var fullScreenStorage = CCUserDefaultsStorage(with: NSNumber.self, key: "fullScreen")
     var fullScreen: Bool {
         set {
@@ -92,12 +92,16 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         let webPath = resourcesPath.appendingPathComponent("web");
         let indexPath = (webPath as NSString).appendingPathComponent("index.html");
         
-        let indexContent = try! NSString(contentsOfFile: indexPath, encoding: String.Encoding.utf8.rawValue);
+        var indexContent = try! NSString(contentsOfFile: indexPath, encoding: String.Encoding.utf8.rawValue);
+                
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.windows.first;
+            let inset = window?.safeAreaInsets.bottom ?? 0;
+            indexContent = indexContent.replacingOccurrences(of: "--bottom-safe-inset: 0px;", with: "--bottom-safe-inset: \(inset)px;") as NSString
+        }
  
         webView.loadHTMLString(indexContent as String, baseURL: URL(fileURLWithPath: webPath));
         webView.navigationDelegate = self
-        
-        
     }
     
     
