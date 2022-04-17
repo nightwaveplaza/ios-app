@@ -101,7 +101,7 @@ class PlaybackService {
     }
     
     private func urlForQuality() -> URL {
-        self.quality == .High ? URL(string: "https://radio.plaza.one/mp3")! : URL(string: "https://radio.plaza.one/mp3_96")!
+        self.quality == .High ? URL(string: "https://radio.plaza.one/mp3")! : URL(string: "https://radio.plaza.one/mp3_low")!
     }
     
     @objc private func handleInterruption(notification: NSNotification) {
