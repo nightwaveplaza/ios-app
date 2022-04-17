@@ -83,7 +83,7 @@ class StartMenuHandler {
             StartMenuItem(icon: UIImage(named: "ic_profile"), title: "My Profile", targetAction: "user", hasBottomLine: true),
             StartMenuItem(icon: UIImage(named: "ic_settings"), title: "Settings", targetAction: "settings", hasBottomLine: false),
             StartMenuItem(icon: UIImage(named: "ic_help"), title: "About", targetAction: "about", hasBottomLine: false),
-            StartMenuItem(icon: UIImage(named: "ic_launcher"), title: "Donate", targetAction: "support", hasBottomLine: true)
+            StartMenuItem(icon: UIImage(named: "ic_launcher"), title: "Donate", targetAction: "donate", hasBottomLine: true)
         ]
     }
     
